@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تحميل نظام نقطة البيع RM.POS للأندرويد</title>
+  <style>
+    :root { --bg: #0b1120; --surface: #111827; --card: #1e293b; --border: #334155; --text: #f8fafc; --muted: #94a3b8; --accent: #38bdf8; --ok: #22c55e; }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif; }
+    body { margin: 0; background: radial-gradient(circle at top, #172554 0%, var(--bg) 55%); color: var(--text); min-height: 100vh; padding: 28px 16px; }
+    .wrap { max-width: 820px; margin: 0 auto; }
+    .hero { background: rgba(30, 41, 59, 0.85); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
+    .pill { display: inline-block; padding: 5px 14px; border-radius: 999px; background: rgba(56, 189, 248, 0.16); color: var(--accent); font-weight: 700; font-size: 13px; margin-bottom: 12px; }
+    h1 { margin: 0 0 10px; font-size: 30px; }
+    .lead { color: var(--muted); font-size: 15.5px; line-height: 1.7; max-width: 620px; margin: 0 auto 24px; }
+    .download-btn { display: inline-block; background: linear-gradient(135deg, #0284c7, #38bdf8); color: #082f49; text-decoration: none; font-weight: 800; font-size: 17px; padding: 14px 32px; border-radius: 12px; box-shadow: 0 10px 24px rgba(56, 189, 248, 0.28); }
+    .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 24px; text-align: right; }
+    .meta-box { background: rgba(15, 23, 42, 0.75); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+    .meta-label { font-size: 12px; color: var(--muted); }
+    .meta-value { font-size: 15px; font-weight: 700; margin-top: 4px; }
+    .section { background: rgba(30, 41, 59, 0.78); border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px; margin-top: 18px; }
+    .section h2 { margin: 0 0 12px; font-size: 18px; }
+    ul, ol { margin: 0; padding-right: 20px; color: #e2e8f0; line-height: 1.85; font-size: 14.5px; }
+    .sha { background: #020617; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-family: monospace; font-size: 12px; direction: ltr; text-align: left; word-break: break-all; color: #7dd3fc; }
+    footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="pill" id="versionBadge">RM.POS • Android</div>
+      <h1>نظام نقطة البيع RM.POS</h1>
+      <p class="lead">
+        تطبيق أندرويد متكامل لإدارة المبيعات، المخزون، الجرد، الديون، المشتريات، التقارير المالية،
+        والطباعة الحرارية عبر Bluetooth وWi-Fi مع قاعدة بيانات مشفّرة بالكامل (AES-256).
+      </p>
+      <a id="downloadLink" class="download-btn" href="downloads/RM-POS-v1.3.3-release.apk" download>
+        تحميل أحدث نسخة APK للأندرويد
+      </a>
+
+      <div class="meta">
+        <div class="meta-box">
+          <div class="meta-label">الإصدار الحالي</div>
+          <div class="meta-value" id="verText">v1.3.3</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">النظام المدعوم</div>
+          <div class="meta-value" id="minSdkText">Android 7.0+</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">تاريخ الإصدار</div>
+          <div class="meta-value" id="dateText">—</div>
+        </div>
+        <div class="meta-box">
+          <div class="meta-label">معرّف الحزمة</div>
+          <div class="meta-value" style="font-size:12.5px;direction:ltr;text-align:left;" id="pkgText">com.aistudio.rmpos.x7m4qp</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>التحقق من سلامة الملف (SHA-256)</h2>
+      <div class="sha" id="shaBox">جارٍ التحميل...</div>
+    </div>
+
+    <div class="section">
+      <h2>أبرز مزايا هذا الإصدار</h2>
+      <ul id="notesList">
+        <li>وحدة الجرد وسلة الجرد التفاعلية مع التصدير إلى PDF وExcel</li>
+        <li>خرائط فورية لتحديد مواقع العملاء والموردين</li>
+        <li>تشفير AES-256 لقاعدة البيانات ونسخ احتياطي مشفّر خارج الجهاز</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>خطوات التثبيت على هاتف أندرويد</h2>
+      <ol>
+        <li>اضغط على زر «تحميل أحدث نسخة APK للأندرويد» أعلاه.</li>
+        <li>افتح الملف بعد اكتمال التحميل، وإذا طلب الهاتف الإذن فعّل «التثبيت من هذا المصدر».</li>
+        <li>افتح تطبيق RM.POS وشارك معرّف الجهاز (Device ID) لتفعيل اشتراكك.</li>
+      </ol>
+    </div>
+
+    <footer>RM.POS — البوابة الرسمية للتحميل والتحقق من التراخيص</footer>
+  </div>
+
+  <script>
+    fetch('downloads/version.json', { cache: 'no-store' })
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (!data) return;
+        document.getElementById('versionBadge').textContent = data.appName + ' • v' + data.versionName;
+        document.getElementById('verText').textContent = 'v' + data.versionName + ' (#' + data.versionCode + ')';
+        document.getElementById('minSdkText').textContent = data.minAndroidVersion || 'Android 7.0+';
+        document.getElementById('dateText').textContent = data.releasedAt || '—';
+        document.getElementById('pkgText').textContent = data.applicationId || '';
+        document.getElementById('shaBox').textContent = data.sha256 || '—';
+        if (data.apkFile) {
+          document.getElementById('downloadLink').setAttribute('href', data.apkFile);
+        }
+        if (Array.isArray(data.notesAr) && data.notesAr.length > 0) {
+          var ul = document.getElementById('notesList');
+          ul.textContent = '';
+          data.notesAr.forEach(function(item) {
+            var li = document.createElement('li');
+            li.textContent = String(item);
+            ul.appendChild(li);
+          });
+        }
+      })
+      .catch(function() {
+        document.getElementById('shaBox').textContent = 'تعذّر قراءة version.json';
+      });
+  </script>
+</body>
+</html>

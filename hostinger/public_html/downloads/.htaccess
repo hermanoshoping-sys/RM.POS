@@ -1,0 +1,21 @@
+# Ensure signed Android APK files download cleanly with strict MIME type
+
+Options -Indexes
+
+<IfModule mod_mime.c>
+    AddType application/vnd.android.package-archive .apk
+</IfModule>
+
+<FilesMatch "\.apk$">
+    <IfModule mod_headers.c>
+        Header set Content-Disposition "attachment"
+        Header set X-Content-Type-Options "nosniff"
+        Header set Cache-Control "no-cache, must-revalidate"
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>

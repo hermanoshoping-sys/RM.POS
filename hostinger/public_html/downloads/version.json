@@ -1,0 +1,21 @@
+{
+  "appName": "RM.POS",
+  "applicationId": "com.aistudio.rmpos.x7m4qp",
+  "versionName": "1.3.3",
+  "versionCode": 7,
+  "schemaVersion": 23,
+  "minAndroidVersion": "7.0 (API 24)",
+  "apkFile": "downloads/RM-POS-v1.3.3-release.apk",
+  "sha256": "REPLACE_WITH_ACTUAL_SHA256_AFTER_RELEASE_BUILD",
+  "releasedAt": "2026-11-25",
+  "notesAr": [
+    "وحدة الجرد وسلة الجرد التفاعلية مع التصدير إلى PDF وExcel",
+    "دعم الخرائط الفورية عبر OpenFreeMap بدون الحاجة إلى خوادم OSM العامة",
+    "حماية الصلاحيات وتشديد التحقق من الترخيص والنسخ الاحتياطي المشفّر"
+  ],
+  "notesFr": [
+    "Module d'inventaire et panier d'inventaire interactif avec export PDF/Excel",
+    "Cartes interactives via OpenFreeMap conformes à la politique OSM",
+    "Contrôles d'accès renforcés et sauvegarde chiffrée AES-256"
+  ]
+}
