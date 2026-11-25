@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RM.POS</string>
+    <string name="title_pos">Point of Sale</string>
+    <string name="title_inventory">Inventory</string>
+    <string name="title_sales">Sales Invoices</string>
+    <string name="title_purchases">Purchase Invoices</string>
+    <string name="title_clients">Customers</string>
+    <string name="title_suppliers">Suppliers</string>
+    <string name="title_expenses">Expenses</string>
+    <string name="title_reports">Analytics &amp; Reports</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_users">User Management</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_search">Search</string>
+    <string name="action_add">Add</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_close">Close</string>
+    <string name="action_print">Print</string>
+    <string name="action_checkout">Pay / Checkout</string>
+    <string name="action_clear_cart">Clear Cart</string>
+    <string name="action_suspend">Hold Invoice</string>
+    <string name="action_restore">Restore Invoice</string>
+    <string name="cart_total">Total</string>
+    <string name="cart_discount">Discount</string>
+    <string name="cart_items_count">Items Count</string>
+    <string name="empty_cart">Cart is empty</string>
+    <string name="login_title">System Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_pin">PIN Code</string>
+    <string name="login_button">Login</string>
+
+    <!-- Dashboard Screen Strings -->
+    <string name="dashboard_sync_ready">Ready for cloud backup</string>
+    <string name="dashboard_sync_now">Sync Now</string>
+    <string name="dashboard_create_invoices">Create Invoices</string>
+    <string name="dashboard_direct_access">Direct Access</string>
+    <string name="dashboard_btn_new_sale">+ New Sale</string>
+    <string name="dashboard_new_sale_title">New Sales Invoice</string>
+    <string name="dashboard_new_sale_desc">POS, barcode scanning, and receipt</string>
+    <string name="dashboard_btn_new_purchase">+ New Purchase</string>
+    <string name="dashboard_new_purchase_title">New Purchase Invoice</string>
+    <string name="dashboard_new_purchase_desc">Supplier goods entry and stock update</string>
+
+    <!-- POS Register Screen Strings -->
+    <string name="pos_new_sale_title">Create New Sales Invoice</string>
+    <string name="pos_new_sale_subtitle">Point of Sale &amp; Barcode Scanning</string>
+    <string name="pos_tab_catalog">Catalog</string>
+    <string name="pos_tab_invoices">Invoices</string>
+    <string name="pos_guest_client">Walk-in / Unregistered Client</string>
+    <string name="pos_client_label">Client:</string>
+    <string name="pos_change_client">Change</string>
+    <string name="pos_search_placeholder">Search by name or barcode</string>
+    <string name="pos_category_all">All</string>
+    <string name="pos_product_families">+ Product Families</string>
+    <string name="pos_shopping_cart">Shopping Cart</string>
+    <string name="pos_clear_all">Clear</string>
+    <string name="pos_total">Total</string>
+    <string name="pos_confirm_sale">Confirm Sale</string>
+    <string name="pos_select_client_dialog">Select Invoice Client</string>
+    <string name="pos_search_client_placeholder">Search client name, phone, or barcode...</string>
+    <string name="pos_general_guest_client">Walk-in Client (No Account)</string>
+
+    <!-- Cart Screen Strings -->
+    <string name="cart_title">Cart</string>
+    <string name="cart_item_return">Return / Refund</string>
+    <string name="cart_discount_label">Discount</string>
+    <string name="cart_subtotal_label">Subtotal</string>
+    <string name="cart_total_label">Total</string>
+    <string name="cart_suspend_label">Hold</string>
+    <string name="cart_pay_label">Pay</string>
+    <string name="cart_action_more">More</string>
+    <string name="cart_action_calc">Calc</string>
+    <string name="cart_action_hold">Hold</string>
+    <string name="cart_update_button">Update Cart</string>
+    <string name="cart_remove_button">Remove from Cart</string>
+
+    <!-- Sales Invoices Screen Strings -->
+    <string name="sales_title_clients">Customer Invoices</string>
+    <string name="sales_all">All</string>
+    <string name="sales_paid">Paid</string>
+    <string name="sales_debt">Credit (Debt)</string>
+    <string name="sales_search_placeholder">Search by invoice # or customer...</string>
+    <string name="sales_seller_label">Seller:</string>
+    <string name="sales_all_sellers">All Sellers</string>
+    <string name="sales_payment_cash">Cash</string>
+    <string name="sales_payment_card">Card</string>
+    <string name="sales_payment_debt">Credit</string>
+    <string name="sales_payment_bank">Bank Transfer</string>
+    <string name="sales_edit_title">Edit Sales Invoice</string>
+    <string name="sales_sold_items">Sold Items:</string>
+    <string name="sales_received_amount">Received / Paid Amount (DH)</string>
+    <string name="sales_remaining_debt">Remaining Debt:</string>
+    <string name="sales_change_return">Change:</string>
+    <string name="sales_save_changes">Save Changes</string>
+    <string name="sales_permission_edit_denied">You do not have permission to edit invoices. Please contact an admin.</string>
+    <string name="sales_permission_delete_denied">You do not have permission to delete invoices. Restricted to managers.</string>
+    <string name="sales_invoice_settled">Invoice settled and confirmed successfully</string>
+    <string name="sales_invoice_marked_debt">Invoice marked as credit successfully</string>
+
+    <!-- Unified Multilingual Dictionary Resources (Bilingual.get) -->
+    <string name="dict_app_title">Supermarket POS</string>
+    <string name="dict_login">Sign In</string>
+    <string name="dict_username">Username</string>
+    <string name="dict_password">Password / PIN</string>
+    <string name="dict_remember_me">Remember me</string>
+    <string name="dict_fingerprint">Biometric Login</string>
+    <string name="dict_manager">Manager</string>
+    <string name="dict_cashier">Cashier</string>
+    <string name="dict_login_error">Invalid username or password</string>
+
+    <string name="dict_sales_today">Today\'s Sales</string>
+    <string name="dict_profit_today">Today\'s Profit</string>
+    <string name="dict_invoice_count">Invoices Count</string>
+    <string name="dict_customer_count">Customers Count</string>
+    <string name="dict_product_count">Products Count</string>
+    <string name="dict_low_stock">Low Stock</string>
+    <string name="dict_recent_ops">Recent Operations</string>
+
+    <string name="dict_new_sale_btn">POS / Sale</string>
+    <string name="dict_add_prod_btn">Add Product</string>
+    <string name="dict_inventory_btn">Inventory</string>
+    <string name="dict_customers_btn">Customers</string>
+    <string name="dict_reports_btn">Reports</string>
+    <string name="dict_pos_btn">Sale</string>
+    <string name="dict_clients_btn">Clients</string>
+    <string name="dict_expenses_btn">Expenses</string>
+    <string name="dict_settings_btn">Settings</string>
+    <string name="dict_dashboard_btn">Home</string>
+    <string name="dict_dashboard">Dashboard</string>
+    <string name="dict_suppliers_btn">Suppliers</string>
+    <string name="dict_purchases_btn">Purchases</string>
+    <string name="dict_payments_btn">Payments</string>
+
+    <string name="dict_search_by_name">Search by name / barcode...</string>
+    <string name="dict_scan_barcode">Barcode Scanner</string>
+    <string name="dict_product">Product</string>
+    <string name="dict_quantity">Quantity</string>
+    <string name="dict_unit_price">Unit Price</string>
+    <string name="dict_total">Total</string>
+    <string name="dict_subtotal">Subtotal</string>
+    <string name="dict_discount">Discount</string>
+    <string name="dict_discount_type">Discount Type</string>
+    <string name="dict_suspend_sale">Hold Invoice</string>
+    <string name="dict_recalled_sales">Held Sales</string>
+    <string name="dict_open_drawer">Open Cash Drawer</string>
+    <string name="dict_drawer_opened">Cash drawer opened successfully!</string>
+    <string name="dict_checkout">Checkout &amp; Pay</string>
+    <string name="dict_clear_cart">Clear Cart</string>
+    <string name="dict_product_added">Product added to cart</string>
+
+    <string name="dict_payment_method">Payment Method</string>
+    <string name="dict_cash">Cash</string>
+    <string name="dict_card">Card</string>
+    <string name="dict_bank">Bank Transfer</string>
+    <string name="dict_mixed">Mixed</string>
+    <string name="dict_received_amount">Amount Received</string>
+    <string name="dict_change_amount">Change Due</string>
+    <string name="dict_finalize">Confirm &amp; Print</string>
+    <string name="dict_client_debit_added">Customer credit recorded</string>
+
+    <string name="dict_barcode">Barcode</string>
+    <string name="dict_name_ar">Name</string>
+    <string name="dict_description">Description</string>
+    <string name="dict_category">Category</string>
+    <string name="dict_unit">Unit</string>
+    <string name="dict_purchase_price">Cost Price</string>
+    <string name="dict_selling_price">Sell Price</string>
+    <string name="dict_wholesale_price">Wholesale Price</string>
+    <string name="dict_special_price">Special Price</string>
+    <string name="dict_initial_stock">Current Stock</string>
+    <string name="dict_min_stock_alert">Min Stock Alert</string>
+    <string name="dict_save">Save</string>
+    <string name="dict_select_category">Select Category</string>
+    <string name="dict_new_category">New Category</string>
+
+    <string name="dict_calc_title">Quick Calculator</string>
+    <string name="dict_retrieve_invoices">Invoice History</string>
+    <string name="dict_invoice_no">Invoice #</string>
+    <string name="dict_void_invoice">Credit Invoices</string>
+    <string name="dict_reprint">Reprint</string>
+    <string name="dict_status_success">Completed</string>
+    <string name="dict_status_voided">Credit</string>
+    <string name="dict_status_debt">Credit</string>
+    <string name="dict_status_paid">Paid</string>
+    <string name="dict_settle_debt">Settle Invoice</string>
+
+    <string name="dict_stock_movements">Stock Movements</string>
+    <string name="dict_type">Type</string>
+    <string name="dict_notes">Notes</string>
+    <string name="dict_inflow">In</string>
+    <string name="dict_outflow">Out</string>
+
+    <string name="dict_phone">Phone</string>
+    <string name="dict_address">Address</string>
+    <string name="dict_email">Email</string>
+    <string name="dict_balance_debit">Balance / Debt</string>
+    <string name="dict_total_spend">Total Purchases</string>
+    <string name="dict_add_customer">Add Customer</string>
+    <string name="dict_add_supplier">Add Supplier</string>
+    <string name="dict_supplier_debt">Supplier Debt</string>
+
+    <string name="dict_supplier">Supplier</string>
+    <string name="dict_paid_amount">Paid Amount</string>
+    <string name="dict_record_purchase">New Purchase Invoice</string>
+
+    <string name="dict_sales_period_report">Sales &amp; Profit Report</string>
+    <string name="dict_weekly_report">Weekly Report</string>
+    <string name="dict_monthly_report">Monthly Report</string>
+    <string name="dict_best_sellers">Best Sellers</string>
+    <string name="dict_expenses">Daily Expenses</string>
+    <string name="dict_add_expense">Add Expense</string>
+    <string name="dict_expense_title">Expense Title</string>
+    <string name="dict_amount">Amount</string>
+    <string name="dict_total_profits">Estimated Net Profit</string>
+
+    <string name="dict_export_pdf">Export PDF</string>
+    <string name="dict_export_excel">Export CSV/Excel</string>
+    <string name="dict_backup_btn">System Backup</string>
+    <string name="dict_restore_btn">Restore Backup</string>
+    <string name="dict_backup_success">Local backup saved!</string>
+    <string name="dict_restore_success">System restored successfully!</string>
+
+    <string name="dict_settings">Settings</string>
+    <string name="dict_shop_name">Store Name</string>
+    <string name="dict_receipt_header">Receipt Header</string>
+    <string name="dict_receipt_footer">Receipt Footer</string>
+    <string name="dict_users_management">User Management</string>
+
+    <!-- Domain Error Messages -->
+    <string name="err_permission_denied">Permission denied for this operation</string>
+    <string name="err_insufficient_stock">Requested quantity exceeds available stock</string>
+    <string name="err_invalid_amount">Invalid amount or quantity</string>
+    <string name="err_empty_items">Cannot complete operation because the items list is empty</string>
+    <string name="err_record_not_found">Requested record was not found</string>
+    <string name="err_duplicate_invoice_number">Invoice number is already in use</string>
+    <string name="err_geo_fence_blocked">Operation blocked outside customer geofence</string>
+    <string name="err_database_constraint">Database constraint prevented saving changes</string>
+    <string name="err_unknown">An unexpected error occurred</string>
+
+    <!-- Licensing, Printer, Backup & Map Strings -->
+    <string name="lic_title">Cryptographic License (ECDSA P-256)</string>
+    <string name="lic_subtitle">Bound to this device with signed offline grace window</string>
+    <string name="lic_device_id_label">Device ID</string>
+    <string name="lic_copy_device_id">Copy Device ID</string>
+    <string name="lic_copied_toast">Device ID copied to clipboard</string>
+    <string name="lic_active_badge">Activated (Signed)</string>
+    <string name="lic_inactive_badge">Activation Required</string>
+    <string name="lic_key_id_label">Signing Key ID (kid)</string>
+    <string name="lic_expires_label">Subscription Expiry</string>
+    <string name="lic_grace_remaining_label">Offline Grace Window</string>
+    <string name="lic_renew_online_btn">Renew Offline Grace Online</string>
+    <string name="lic_activate_btn">Verify &amp; Activate Signed Token</string>
+    <string name="lic_deactivate_btn">Deactivate License</string>
+    <string name="lic_token_placeholder">Paste signed ECDSA token (payload.signature)</string>
+
+    <string name="printer_bt_title">Bluetooth Thermal Printer</string>
+    <string name="printer_wifi_title">Wi-Fi / LAN ESC-POS Printer</string>
+    <string name="printer_system_title">System Print &amp; PDF Preview</string>
+    <string name="printer_test_btn">Test Print</string>
+    <string name="printer_connected_badge">Connected</string>
+    <string name="printer_disconnected_badge">Disconnected</string>
+    <string name="printer_reconnecting_badge">Reconnecting...</string>
+    <string name="printer_permission_required">Bluetooth permission is required to print</string>
+
+    <string name="backup_encrypted_badge">AES-256-GCM Encrypted</string>
+    <string name="backup_export_reminder_title">External Backup Reminder</string>
+    <string name="backup_export_now_btn">Export Encrypted Backup</string>
+    <string name="backup_failed_toast">Backup operation failed</string>
+
+    <string name="map_picker_title">Select Store or Client Location</string>
+    <string name="map_osm_attribution">Map data © OpenStreetMap contributors</string>
+</resources>

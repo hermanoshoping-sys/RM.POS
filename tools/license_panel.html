@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أداة استخراج رمز التفعيل الموقّع — RM.POS</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --primary: #0f52ba;
+      --primary-hover: #0a3d8f;
+      --success: #137333;
+      --success-bg: #e6f4ea;
+      --warn: #b06000;
+      --warn-bg: #fef7e0;
+      --danger: #c5221f;
+      --danger-bg: #fce8e6;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif; }
+    body {
+      margin: 0;
+      padding: 18px 12px 48px;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    .header {
+      background: linear-gradient(135deg, #0b3578, #1d4ed8);
+      color: #fff;
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      box-shadow: 0 8px 22px rgba(15, 82, 186, 0.16);
+    }
+    .header h1 { margin: 0 0 6px; font-size: 1.3rem; }
+    .header p { margin: 0; opacity: 0.94; font-size: 0.9rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .hint { font-size: 0.82rem; color: var(--muted); margin-top: 5px; }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      direction: ltr;
+      text-align: left;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .field { margin-bottom: 14px; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    button, .file-btn {
+      cursor: pointer;
+      border: none;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s, transform 0.06s;
+    }
+    button:active { transform: scale(0.99); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: #e2e8f0; color: var(--text); }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-success { background: var(--success); color: #fff; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .chip {
+      padding: 6px 12px;
+      font-size: 0.84rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .chip:hover { background: #dbeafe; }
+    .status-box {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .status-ok { background: var(--success-bg); color: var(--success); border: 1px solid #b7dfbe; }
+    .status-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f5dc93; }
+    .status-err { background: var(--danger-bg); color: var(--danger); border: 1px solid #f5c2c0; }
+    .ready-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid #86efac;
+      padding: 12px 16px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tab-btn {
+      flex: 1;
+      padding: 11px;
+      background: #e2e8f0;
+      color: var(--muted);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .tab-btn.active { background: var(--primary); color: #fff; }
+    .output-box {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 14px;
+      border-radius: 12px;
+      word-break: break-all;
+      font-size: 0.88rem;
+      margin-top: 12px;
+      border: 1px solid #1e293b;
+      user-select: all;
+    }
+    .meta-summary {
+      font-size: 0.86rem;
+      color: var(--text);
+      margin-top: 10px;
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .step-box {
+      background: #f8fafc;
+      border: 1.5px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .hidden { display: none !important; }
+    input[type="file"] { display: none; }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+    .checkbox-row input { width: 18px; height: 18px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>أداة توليد رموز تفعيل RM.POS الموقّعة رقمياً</h1>
+    <p>تعمل مباشرة على هاتفك أو حاسوبك بدون إنترنت وبدون أوامر أو تثبيت أي برامج.</p>
+  </div>
+
+  <!-- شريط الجاهزية المختصر عند تطابق المفتاح -->
+  <div id="compactReadyBar" class="ready-bar hidden">
+    <span>✅ ختمك الرقمي السري جاهز في المتصفح ومطابق للتطبيق (<code>k2026-v2</code>)</span>
+    <button type="button" class="btn-secondary" id="btnToggleKeyCard" style="padding:6px 12px; font-size:0.82rem;">⚙️ إدارة المفتاح</button>
+  </div>
+
+  <!-- بطاقة إعداد المفتاح السري (تظهر تلقائياً عند أول استخدام فقط، وتختفي تلقائياً بعد التفعيل) -->
+  <div class="card" id="keySetupCard">
+    <h2>
+      <span>🔑 إعداد مفتاح المالك السري (يُجرى مرة واحدة فقط)</span>
+      <span id="keyMatchBadge" class="hint">لم يتم ربط المفتاح بعد</span>
+    </h2>
+
+    <p style="margin:0 0 10px; font-size:0.9rem; color:var(--muted);">
+      لأمان تطبيقك، لا يُحفظ مفتاحك السري داخل ملفات المشروع. إن كانت هذه أول مرة تفتح فيها الأداة، اضغط الزر الأول بالأسفل لإنشاء ختمك السري وحفظه في متصفحك تلقائياً:
+    </p>
+
+    <div class="btn-row" style="margin-bottom:12px;">
+      <button type="button" class="btn-primary" id="btnQuickCreateOwnerKey">1️⃣ إنشاء مفتاحي السري الآن (بضغطة زر)</button>
+      <label class="file-btn btn-secondary" for="pemFileInput">📂 أو اختيار ملف مفتاح سابق (.pem)</label>
+      <input type="file" id="pemFileInput" accept=".pem,.key,.txt" />
+    </div>
+
+    <!-- يظهر بعد الضغط على إنشاء مفتاح جديد لإرسال المفتاح العام فقط لاعتماده في التطبيق -->
+    <div id="syncPublicStepBox" class="step-box hidden">
+      <div style="font-weight:700; color:var(--primary); margin-bottom:6px;">
+        🎉 تم إنشاء مفتاحك السري وحفظه في متصفحك وتنزيل نسخة احتياطية منه على جهازك!
+      </div>
+      <div style="font-size:0.88rem; margin-bottom:10px;">
+        بقيت خطوة أخيرة (تُجرى <strong>مرة واحدة فقط</strong>): اضغط الزر الأخضر التالي لنسخ <strong>المفتاح العام الآمن</strong>، ثم الصقه في محادثة AI Studio ليتم اعتماده في التطبيق نهائياً:
+      </div>
+      <div class="btn-row">
+        <button type="button" class="btn-success" id="btnCopyApprovalMsg" style="width:100%; padding:13px;">
+          2️⃣ نسخ المفتاح العام لإرساله في المحادثة لاعتماده في التطبيق
+        </button>
+        <button type="button" class="btn-secondary" id="btnDownloadBackupPem">⬇️ تنزيل نسخة احتياطية من المفتاح السري (.pem)</button>
+      </div>
+    </div>
+
+    <details style="margin-top:12px;">
+      <summary style="cursor:pointer; font-size:0.85rem; color:var(--muted); font-weight:600;">خيارات متقدمة (عرض المفتاح العام / إدخال نصي يدوي)</summary>
+      <div style="margin-top:10px;">
+        <div class="field">
+          <label for="privateKeyInput">محتوى المفتاح الخاص (محفوظ محلياً في متصفحك فقط خارج المشروع)</label>
+          <textarea id="privateKeyInput" rows="3" class="mono" placeholder="يُملأ تلقائياً عند إنشاء المفتاح أو اختيار ملف .pem..."></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="field" style="margin-bottom:0;">
+            <label for="kidInput">معرّف المفتاح (<code>kid</code>)</label>
+            <input type="text" id="kidInput" class="mono" value="k2026-v2" />
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label>المفتاح العام المشتق (<code>PUBLIC_KEY_BASE64</code>)</label>
+            <input type="text" id="derivedPublicKeyOutput" class="mono" readonly />
+          </div>
+        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="rememberInBrowserCheckbox" checked />
+          <span>تذكّر مفتاحي السري في هذا المتصفح على جهازي حتى لا أرفعه كل مرة</span>
+        </label>
+        <div class="btn-row">
+          <button type="button" class="btn-secondary" id="btnClearBrowserKey" style="font-size:0.82rem;">🗑️ مسح المفتاح المحفوظ من هذا المتصفح</button>
+        </div>
+      </div>
+    </details>
+
+    <div id="keyStatusBox" class="status-box status-warn">
+      اضغط «1️⃣ إنشاء مفتاحي السري الآن» أو اختر ملف <code>.pem</code> الخاص بك للبدء.
+    </div>
+  </div>
+
+  <!-- البطاقة الرئيسية اليومية: استخراج رمز التفعيل بضغطة زر -->
+  <div class="card">
+    <div class="tabs">
+      <button type="button" class="tab-btn active" id="tabLicenseBtn">✨ استخراج رمز تفعيل للزبون</button>
+      <button type="button" class="tab-btn" id="tabRecoveryBtn">🛠️ رمز استرجاع كلمة المرور</button>
+    </div>
+
+    <div class="field">
+      <label for="deviceIdInput">معرّف جهاز الزبون (Device ID — المكوّن من 16 حرفاً ورقماً في شاشة التفعيل)</label>
+      <input type="text" id="deviceIdInput" class="mono" maxlength="24" placeholder="مثال: BF60CC26FB79ED85" />
+    </div>
+
+    <div id="panelLicense">
+      <div class="grid-2">
+        <div class="field">
+          <label for="daysInput">مدة التفعيل (بالأيام)</label>
+          <input type="number" id="daysInput" min="1" max="3650" value="365" />
+          <div class="chip-row">
+            <span class="chip" data-days="7">تجريبي (7)</span>
+            <span class="chip" data-days="30">شهر (30)</span>
+            <span class="chip" data-days="90">3 أشهر (90)</span>
+            <span class="chip" data-days="180">6 أشهر (180)</span>
+            <span class="chip" data-days="365">سنة (365)</span>
+            <span class="chip" data-days="730">سنتان (730)</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="editionSelect">فئة الرخصة</label>
+          <select id="editionSelect">
+            <option value="PRO" selected>PRO — النسخة الاحترافية الكاملة</option>
+            <option value="ENTERPRISE">ENTERPRISE — نسخة المؤسسات</option>
+            <option value="STANDARD">STANDARD — النسخة القياسية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="checkbox-row" style="margin-bottom:8px;">
+          <input type="checkbox" id="fullOfflineCheckbox" checked />
+          <span><strong>يعمل بدون إنترنت طوال فترة الرخصة بالكامل</strong></span>
+        </label>
+        <div id="customGraceWrapper" class="hidden">
+          <label for="graceDaysInput">فترة السماح دون إنترنت (بالأيام)</label>
+          <input type="number" id="graceDaysInput" min="1" max="3650" value="30" />
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="btnGenerateLicense" style="width:100%; padding:14px; font-size:1.05rem;">
+        ✨ توليد ونسخ رمز التفعيل بضغطة زر
+      </button>
+    </div>
+
+    <div id="panelRecovery" class="hidden">
+      <div class="grid-2">
+        <div class="field">
+          <label for="targetUserInput">اسم المستخدم المراد استرجاعه</label>
+          <input type="text" id="targetUserInput" class="mono" value="admin" />
+        </div>
+        <div class="field">
+          <label for="recoveryHoursInput">صلاحية رمز الاسترجاع (بالساعات)</label>
+          <input type="number" id="recoveryHoursInput" min="1" max="168" value="24" />
+        </div>
+      </div>
+
+      <button type="button" class="btn-primary" id="btnGenerateRecovery" style="width:100%; padding:14px; font-size:1.05rem;">
+        🛠️ توليد ونسخ رمز الاسترجاع بضغطة زر
+      </button>
+    </div>
+
+    <div id="genErrorBox" class="status-box status-err hidden"></div>
+
+    <div id="resultSection" class="hidden">
+      <div id="verifyCheckBadge" class="status-box status-ok"></div>
+      <div class="meta-summary" id="tokenSummaryBox"></div>
+      <div class="output-box mono" id="tokenOutput"></div>
+      <div class="btn-row">
+        <button type="button" class="btn-success" id="btnCopyToken" style="flex:1;">📋 نسخ الرمز الموقّع</button>
+        <button type="button" class="btn-secondary" id="btnShareWhatsapp" style="flex:1;">💬 إرسال للزبون عبر واتساب</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // إزالة مفاتيح الإصدار الأول المكشوفة إن وجدت في المتصفح
+  try {
+    localStorage.removeItem("rmpos_owner_ecdsa_priv_b64_v1");
+    localStorage.removeItem("rmpos_owner_ecdsa_kid_v1");
+  } catch (_) {}
+
+  const STORAGE_PRIV_KEY = "rmpos_owner_vault_priv_v2";
+  const STORAGE_KID_KEY = "rmpos_owner_vault_kid_v2";
+
+  // المفتاح العام فقط (PUBLIC KEY) المعتمد حالياً في LicenseSecurityManager.kt
+  // لا يحتوي هذا الملف على أي مفتاح خاص إطلاقاً.
+  const DEFAULT_KID = "k2026-v2";
+  const APP_EMBEDDED_PUBLIC_KEY_B64 =
+    "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE0KlJFIbcVllxExVzkjaw2POdxnY+i6vmtpqGyUSm59MZC1YKjqkbk2JtSk575BZZ+C+MQ73CMzZUosTLKGm08A==";
+
+  // =========================================================================
+  // 1. محرك التشفير المحلي المستقل بدون إنترنت: SHA-256 + ECDSA P-256
+  // =========================================================================
+
+  const K256 = new Uint32Array([
+    0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+    0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+    0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+    0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+    0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+    0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+    0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+    0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+  ]);
+
+  function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
+
+  function sha256Bytes(msgBytes) {
+    let h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a;
+    let h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
+
+    const bitLen = msgBytes.length * 8;
+    const padLen = ((msgBytes.length + 9 + 63) & ~63);
+    const padded = new Uint8Array(padLen);
+    padded.set(msgBytes);
+    padded[msgBytes.length] = 0x80;
+    const dv = new DataView(padded.buffer);
+    dv.setUint32(padLen - 8, Math.floor(bitLen / 0x100000000), false);
+    dv.setUint32(padLen - 4, bitLen >>> 0, false);
+
+    const w = new Uint32Array(64);
+    for (let off = 0; off < padLen; off += 64) {
+      for (let i = 0; i < 16; i++) w[i] = dv.getUint32(off + i * 4, false);
+      for (let i = 16; i < 64; i++) {
+        const s0 = rotr(w[i - 15], 7) ^ rotr(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+        const s1 = rotr(w[i - 2], 17) ^ rotr(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+        w[i] = (w[i - 16] + s0 + w[i - 7] + s1) >>> 0;
+      }
+      let a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+      for (let i = 0; i < 64; i++) {
+        const S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+        const ch = (e & f) ^ (~e & g);
+        const temp1 = (h + S1 + ch + K256[i] + w[i]) >>> 0;
+        const S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+        const maj = (a & b) ^ (a & c) ^ (b & c);
+        const temp2 = (S0 + maj) >>> 0;
+        h = g; g = f; f = e; e = (d + temp1) >>> 0;
+        d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+      }
+      h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0;
+      h4 = (h4 + e) >>> 0; h5 = (h5 + f) >>> 0; h6 = (h6 + g) >>> 0; h7 = (h7 + h) >>> 0;
+    }
+
+    const out = new Uint8Array(32);
+    const odv = new DataView(out.buffer);
+    [h0, h1, h2, h3, h4, h5, h6, h7].forEach((v, idx) => odv.setUint32(idx * 4, v, false));
+    return out;
+  }
+
+  const P256 = {
+    p: 0xffffffff00000001000000000000000000000000ffffffffffffffffffffffffn,
+    a: 0xffffffff00000001000000000000000000000000fffffffffffffffffffffffcn,
+    b: 0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604bn,
+    n: 0xffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551n,
+    halfN: 0x7fffffff800000007fffffffffffffffde737d56d38bcf4279dce5617e3192a8n,
+    Gx: 0x6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296n,
+    Gy: 0x4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5n
+  };
+
+  function mod(a, m) { const r = a % m; return r >= 0n ? r : r + m; }
+
+  function modInv(a, m) {
+    let t = 0n, newT = 1n;
+    let r = m, newR = mod(a, m);
+    while (newR !== 0n) {
+      const q = r / newR;
+      [t, newT] = [newT, t - q * newT];
+      [r, newR] = [newR, r - q * newR];
+    }
+    if (r !== 1n) throw new Error("Non-invertible scalar");
+    return t < 0n ? t + m : t;
+  }
+
+  function pointDouble(pt) {
+    if (!pt) return null;
+    const [x, y] = pt;
+    if (y === 0n) return null;
+    const s = mod((3n * x * x + P256.a) * modInv(2n * y, P256.p), P256.p);
+    const rx = mod(s * s - 2n * x, P256.p);
+    const ry = mod(s * (x - rx) - y, P256.p);
+    return [rx, ry];
+  }
+
+  function pointAdd(p1, p2) {
+    if (!p1) return p2;
+    if (!p2) return p1;
+    const [x1, y1] = p1;
+    const [x2, y2] = p2;
+    if (x1 === x2) {
+      if (mod(y1 + y2, P256.p) === 0n) return null;
+      return pointDouble(p1);
+    }
+    const s = mod((y2 - y1) * modInv(x2 - x1, P256.p), P256.p);
+    const rx = mod(s * s - x1 - x2, P256.p);
+    const ry = mod(s * (x1 - rx) - y1, P256.p);
+    return [rx, ry];
+  }
+
+  function pointMul(k, pt) {
+    let result = null;
+    let addend = pt;
+    let scalar = k;
+    while (scalar > 0n) {
+      if (scalar & 1n) result = pointAdd(result, addend);
+      addend = pointDouble(addend);
+      scalar >>= 1n;
+    }
+    return result;
+  }
+
+  function bytesToBigInt(bytes) {
+    let v = 0n;
+    for (let i = 0; i < bytes.length; i++) v = (v << 8n) | BigInt(bytes[i]);
+    return v;
+  }
+
+  function bigIntTo32Bytes(num) {
+    const out = new Uint8Array(32);
+    let v = num;
+    for (let i = 31; i >= 0; i--) {
+      out[i] = Number(v & 0xffn);
+      v >>= 8n;
+    }
+    return out;
+  }
+
+  function randomScalar() {
+    const buf = new Uint8Array(32);
+    while (true) {
+      crypto.getRandomValues(buf);
+      const k = bytesToBigInt(buf);
+      if (k >= 1n && k < P256.n) return k;
+    }
+  }
+
+  function base64Encode(bytes) {
+    let bin = "";
+    for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+
+  function base64Decode(b64) {
+    const clean = b64.replace(/-----BEGIN [^-]+-----/g, "")
+                     .replace(/-----END [^-]+-----/g, "")
+                     .replace(/\s+/g, "");
+    const bin = atob(clean);
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+    return out;
+  }
+
+  function concatBytes(...arrays) {
+    const total = arrays.reduce((acc, a) => acc + a.length, 0);
+    const res = new Uint8Array(total);
+    let offset = 0;
+    for (const a of arrays) { res.set(a, offset); offset += a.length; }
+    return res;
+  }
+
+  function encodeDerInteger(bigVal) {
+    let raw = bigIntTo32Bytes(bigVal);
+    let start = 0;
+    while (start < raw.length - 1 && raw[start] === 0) start++;
+    raw = raw.slice(start);
+    if (raw[0] & 0x80) raw = concatBytes(new Uint8Array([0x00]), raw);
+    return concatBytes(new Uint8Array([0x02, raw.length]), raw);
+  }
+
+  function encodeDerSignature(r, s) {
+    const rDer = encodeDerInteger(r);
+    const sDer = encodeDerInteger(s);
+    const body = concatBytes(rDer, sDer);
+    return concatBytes(new Uint8Array([0x30, body.length]), body);
+  }
+
+  function decodeDerSignature(derBytes) {
+    if (derBytes[0] !== 0x30) throw new Error("Invalid DER sequence");
+    let idx = 2;
+    if (derBytes[1] & 0x80) idx += (derBytes[1] & 0x7f);
+    if (derBytes[idx] !== 0x02) throw new Error("Invalid DER R integer");
+    const rLen = derBytes[idx + 1];
+    const rBytes = derBytes.slice(idx + 2, idx + 2 + rLen);
+    idx += 2 + rLen;
+    if (derBytes[idx] !== 0x02) throw new Error("Invalid DER S integer");
+    const sLen = derBytes[idx + 1];
+    const sBytes = derBytes.slice(idx + 2, idx + 2 + sLen);
+    return [bytesToBigInt(rBytes), bytesToBigInt(sBytes)];
+  }
+
+  function parsePrivateScalarFromPemOrB64(inputText) {
+    const der = base64Decode(inputText);
+    for (let i = 0; i <= der.length - 37; i++) {
+      if (der[i] === 0x02 && der[i + 1] === 0x01 && der[i + 2] === 0x01 &&
+          der[i + 3] === 0x04 && der[i + 4] === 0x20) {
+        const dBytes = der.slice(i + 5, i + 37);
+        const d = bytesToBigInt(dBytes);
+        if (d >= 1n && d < P256.n) return d;
+      }
+    }
+    throw new Error("تعذر قراءة مفتاح ECDSA P-256 خاص صالح من الملف أو النص المدخل");
+  }
+
+  const SPKI_P256_PREFIX = new Uint8Array([
+    0x30,0x59,0x30,0x13,0x06,0x07,0x2a,0x86,0x48,0xce,0x3d,0x02,0x01,
+    0x06,0x08,0x2a,0x86,0x48,0xce,0x3d,0x03,0x01,0x07,0x03,0x42,0x00,0x04
+  ]);
+
+  function derivePublicKeySpkiBase64(d) {
+    const Q = pointMul(d, [P256.Gx, P256.Gy]);
+    const spki = concatBytes(SPKI_P256_PREFIX, bigIntTo32Bytes(Q[0]), bigIntTo32Bytes(Q[1]));
+    return { spkiBase64: base64Encode(spki), point: Q };
+  }
+
+  function encodePkcs8PrivateKeyBase64(d, Q) {
+    const dBytes = bigIntTo32Bytes(d);
+    const pubUncompressed = concatBytes(new Uint8Array([0x04]), bigIntTo32Bytes(Q[0]), bigIntTo32Bytes(Q[1]));
+    const ecPrivBody = concatBytes(
+      new Uint8Array([0x02, 0x01, 0x01, 0x04, 0x20]),
+      dBytes,
+      new Uint8Array([0xa1, 0x44, 0x03, 0x42, 0x00]),
+      pubUncompressed
+    );
+    const ecPrivSeq = concatBytes(new Uint8Array([0x30, ecPrivBody.length]), ecPrivBody);
+    const algId = new Uint8Array([
+      0x30,0x13,0x06,0x07,0x2a,0x86,0x48,0xce,0x3d,0x02,0x01,
+      0x06,0x08,0x2a,0x86,0x48,0xce,0x3d,0x03,0x01,0x07
+    ]);
+    const pkcs8Body = concatBytes(
+      new Uint8Array([0x02, 0x01, 0x00]),
+      algId,
+      new Uint8Array([0x04, ecPrivSeq.length]),
+      ecPrivSeq
+    );
+    const pkcs8Seq = concatBytes(new Uint8Array([0x30, 0x81, pkcs8Body.length]), pkcs8Body);
+    return base64Encode(pkcs8Seq);
+  }
+
+  function toPem(b64, label) {
+    const lines = b64.match(/.{1,64}/g) || [b64];
+    return `-----BEGIN ${label}-----\n${lines.join("\n")}\n-----END ${label}-----\n`;
+  }
+
+  function ecdsaSignSha256DerBase64(d, messageBytes) {
+    const z = bytesToBigInt(sha256Bytes(messageBytes));
+    while (true) {
+      const k = randomScalar();
+      const R = pointMul(k, [P256.Gx, P256.Gy]);
+      if (!R) continue;
+      const r = mod(R[0], P256.n);
+      if (r === 0n) continue;
+      let s = mod(modInv(k, P256.n) * (z + r * d), P256.n);
+      if (s === 0n) continue;
+      if (s > P256.halfN) s = P256.n - s;
+      return base64Encode(encodeDerSignature(r, s));
+    }
+  }
+
+  function ecdsaVerifySha256DerBase64(Q, messageBytes, sigB64) {
+    const [r, s] = decodeDerSignature(base64Decode(sigB64));
+    if (r < 1n || r >= P256.n || s < 1n || s >= P256.n) return false;
+    const z = bytesToBigInt(sha256Bytes(messageBytes));
+    const w = modInv(s, P256.n);
+    const u1 = mod(z * w, P256.n);
+    const u2 = mod(r * w, P256.n);
+    const P = pointAdd(pointMul(u1, [P256.Gx, P256.Gy]), pointMul(u2, Q));
+    if (!P) return false;
+    return mod(P[0], P256.n) === r;
+  }
+
+  // =========================================================================
+  // 2. منطق الواجهة المبسطة بضغطة زر
+  // =========================================================================
+
+  const elCompactBar = document.getElementById("compactReadyBar");
+  const elKeyCard = document.getElementById("keySetupCard");
+  const elSyncBox = document.getElementById("syncPublicStepBox");
+  const elPriv = document.getElementById("privateKeyInput");
+  const elKid = document.getElementById("kidInput");
+  const elPubOut = document.getElementById("derivedPublicKeyOutput");
+  const elRemember = document.getElementById("rememberInBrowserCheckbox");
+  const elKeyStatus = document.getElementById("keyStatusBox");
+  const elKeyMatchBadge = document.getElementById("keyMatchBadge");
+  const elDeviceId = document.getElementById("deviceIdInput");
+  const elDays = document.getElementById("daysInput");
+  const elEdition = document.getElementById("editionSelect");
+  const elFullOffline = document.getElementById("fullOfflineCheckbox");
+  const elCustomGraceWrap = document.getElementById("customGraceWrapper");
+  const elGraceDays = document.getElementById("graceDaysInput");
+  const elGenErr = document.getElementById("genErrorBox");
+  const elResultSec = document.getElementById("resultSection");
+  const elVerifyBadge = document.getElementById("verifyCheckBadge");
+  const elSummary = document.getElementById("tokenSummaryBox");
+  const elTokenOut = document.getElementById("tokenOutput");
+
+  let activePrivateScalar = null;
+  let activePublicPoint = null;
+  let activePublicSpkiB64 = "";
+  let latestPrivPem = "";
+
+  function copyTextToClipboard(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        if (onDone) onDone();
+      }).catch(function () {
+        fallbackCopy(text, onDone);
+      });
+    } else {
+      fallbackCopy(text, onDone);
+    }
+  }
+
+  function fallbackCopy(text, onDone) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    if (onDone) onDone();
+  }
+
+  function downloadTextFile(filename, content) {
+    const blob = new Blob([content], { type: "application/x-pem-file;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function persistBrowserKeyIfEnabled() {
+    try {
+      if (elRemember.checked && elPriv.value.trim()) {
+        localStorage.setItem(STORAGE_PRIV_KEY, elPriv.value.trim());
+        localStorage.setItem(STORAGE_KID_KEY, elKid.value.trim() || DEFAULT_KID);
+      } else {
+        localStorage.removeItem(STORAGE_PRIV_KEY);
+        localStorage.removeItem(STORAGE_KID_KEY);
+      }
+    } catch (_) {}
+  }
+
+  function inspectEnteredKey(autoCollapseIfMatched) {
+    const raw = elPriv.value.trim();
+    if (!raw) {
+      activePrivateScalar = null;
+      activePublicPoint = null;
+      activePublicSpkiB64 = "";
+      elPubOut.value = "";
+      elCompactBar.classList.add("hidden");
+      elKeyCard.classList.remove("hidden");
+      elKeyMatchBadge.textContent = "لم يتم ربط المفتاح بعد";
+      elKeyStatus.className = "status-box status-warn";
+      elKeyStatus.textContent = "اضغط «1️⃣ إنشاء مفتاحي السري الآن» أو اختر ملف .pem الخاص بك للبدء.";
+      return;
+    }
+    try {
+      const d = parsePrivateScalarFromPemOrB64(raw);
+      const { spkiBase64, point } = derivePublicKeySpkiBase64(d);
+      const pkcs8B64 = encodePkcs8PrivateKeyBase64(d, point);
+      latestPrivPem = toPem(pkcs8B64, "PRIVATE KEY");
+      activePrivateScalar = d;
+      activePublicPoint = point;
+      activePublicSpkiB64 = spkiBase64;
+      elPubOut.value = spkiBase64;
+      persistBrowserKeyIfEnabled();
+
+      if (spkiBase64 === APP_EMBEDDED_PUBLIC_KEY_B64) {
+        elSyncBox.classList.add("hidden");
+        elKeyMatchBadge.textContent = "✅ مطابق للتطبيق (k2026-v2)";
+        elKeyStatus.className = "status-box status-ok";
+        elKeyStatus.textContent = "✅ المفتاح السري جاهز ومطابق 100% للتطبيق. يمكنك توليد الرموز مباشرة بالأسفل.";
+        elCompactBar.classList.remove("hidden");
+        if (autoCollapseIfMatched) {
+          elKeyCard.classList.add("hidden");
+        }
+      } else {
+        elCompactBar.classList.add("hidden");
+        elKeyCard.classList.remove("hidden");
+        elSyncBox.classList.remove("hidden");
+        elKeyMatchBadge.textContent = "⏳ بانتظار اعتماد المفتاح العام في التطبيق";
+        elKeyStatus.className = "status-box status-warn";
+        elKeyStatus.textContent = "اضغط الزر الأخضر «2️⃣ نسخ المفتاح العام لإرساله في المحادثة» أعلاه ليتم اعتماده في التطبيق مرة واحدة.";
+      }
+    } catch (err) {
+      activePrivateScalar = null;
+      activePublicPoint = null;
+      activePublicSpkiB64 = "";
+      elPubOut.value = "";
+      elCompactBar.classList.add("hidden");
+      elKeyCard.classList.remove("hidden");
+      elKeyMatchBadge.textContent = "❌ مفتاح غير صالح";
+      elKeyStatus.className = "status-box status-err";
+      elKeyStatus.textContent = err.message || "صيغة المفتاح الخاص غير صالحة.";
+    }
+  }
+
+  document.getElementById("btnToggleKeyCard").addEventListener("click", function () {
+    elKeyCard.classList.toggle("hidden");
+  });
+
+  elPriv.addEventListener("input", function () { inspectEnteredKey(false); });
+  elRemember.addEventListener("change", persistBrowserKeyIfEnabled);
+
+  document.getElementById("pemFileInput").addEventListener("change", function (ev) {
+    const file = ev.target.files && ev.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      elPriv.value = String(reader.result || "").trim();
+      inspectEnteredKey(true);
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById("btnQuickCreateOwnerKey").addEventListener("click", function () {
+    const d = randomScalar();
+    const { spkiBase64, point } = derivePublicKeySpkiBase64(d);
+    const pkcs8B64 = encodePkcs8PrivateKeyBase64(d, point);
+    latestPrivPem = toPem(pkcs8B64, "PRIVATE KEY");
+    elPriv.value = latestPrivPem.trim();
+    inspectEnteredKey(false);
+    downloadTextFile("rmpos_owner_secret_key_KEEP_SAFE.pem", latestPrivPem);
+  });
+
+  document.getElementById("btnDownloadBackupPem").addEventListener("click", function () {
+    if (latestPrivPem) {
+      downloadTextFile("rmpos_owner_secret_key_KEEP_SAFE.pem", latestPrivPem);
+    }
+  });
+
+  document.getElementById("btnCopyApprovalMsg").addEventListener("click", function () {
+    if (!activePublicSpkiB64) return;
+    const kid = elKid.value.trim() || DEFAULT_KID;
+    const msg = `اعتمد المفتاح العام التالي في التطبيق (${kid}):\n${activePublicSpkiB64}`;
+    copyTextToClipboard(msg, function () {
+      const btn = document.getElementById("btnCopyApprovalMsg");
+      const old = btn.textContent;
+      btn.textContent = "✅ تم النسخ! الصقه الآن في محادثة AI Studio";
+      setTimeout(function () { btn.textContent = old; }, 3500);
+    });
+  });
+
+  document.getElementById("btnClearBrowserKey").addEventListener("click", function () {
+    try {
+      localStorage.removeItem(STORAGE_PRIV_KEY);
+      localStorage.removeItem(STORAGE_KID_KEY);
+    } catch (_) {}
+    elPriv.value = "";
+    elSyncBox.classList.add("hidden");
+    inspectEnteredKey(false);
+  });
+
+  function normalizeWesternHex(str) {
+    return str
+      .replace(/[٠-٩]/g, ch => String(ch.charCodeAt(0) - 0x0660))
+      .replace(/[۰-۹]/g, ch => String(ch.charCodeAt(0) - 0x06f0))
+      .replace(/[^0-9a-fA-F]/g, "")
+      .toUpperCase();
+  }
+
+  elDeviceId.addEventListener("input", function () {
+    const cleaned = normalizeWesternHex(elDeviceId.value).slice(0, 16);
+    if (elDeviceId.value !== cleaned) elDeviceId.value = cleaned;
+  });
+
+  document.querySelectorAll(".chip[data-days]").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      elDays.value = chip.getAttribute("data-days");
+    });
+  });
+
+  elFullOffline.addEventListener("change", function () {
+    elCustomGraceWrap.classList.toggle("hidden", elFullOffline.checked);
+  });
+
+  const tabLic = document.getElementById("tabLicenseBtn");
+  const tabRec = document.getElementById("tabRecoveryBtn");
+  const panelLic = document.getElementById("panelLicense");
+  const panelRec = document.getElementById("panelRecovery");
+
+  tabLic.addEventListener("click", function () {
+    tabLic.classList.add("active");
+    tabRec.classList.remove("active");
+    panelLic.classList.remove("hidden");
+    panelRec.classList.add("hidden");
+    elResultSec.classList.add("hidden");
+    elGenErr.classList.add("hidden");
+  });
+
+  tabRec.addEventListener("click", function () {
+    tabRec.classList.add("active");
+    tabLic.classList.remove("active");
+    panelRec.classList.remove("hidden");
+    panelLic.classList.add("hidden");
+    elResultSec.classList.add("hidden");
+    elGenErr.classList.add("hidden");
+  });
+
+  function showGenError(msg) {
+    elGenErr.textContent = msg;
+    elGenErr.classList.remove("hidden");
+    elResultSec.classList.add("hidden");
+  }
+
+  function encodeUtf8(str) { return new TextEncoder().encode(str); }
+
+  function formatArabicDate(ms) {
+    const d = new Date(ms);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mi = String(d.getMinutes()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd} ${hh}:${mi}`;
+  }
+
+  function finalizeTokenDisplay(payloadObj, summaryHtml) {
+    const payloadBytes = encodeUtf8(JSON.stringify(payloadObj));
+    const payloadB64 = base64Encode(payloadBytes);
+    const sigB64 = ecdsaSignSha256DerBase64(activePrivateScalar, payloadBytes);
+    const selfVerified = ecdsaVerifySha256DerBase64(activePublicPoint, payloadBytes, sigB64);
+    if (!selfVerified) {
+      showGenError("فشل الفحص الذاتي للتوقيع الرقمي!");
+      return;
+    }
+
+    const token = `${payloadB64}.${sigB64}`;
+    elGenErr.classList.add("hidden");
+    if (activePublicSpkiB64 === APP_EMBEDDED_PUBLIC_KEY_B64) {
+      elVerifyBadge.className = "status-box status-ok";
+      elVerifyBadge.textContent = "✅ تم توليد الرمز الموقّع ونسخه تلقائياً إلى الحافظة! الصقه مباشرة في التطبيق.";
+    } else {
+      elVerifyBadge.className = "status-box status-warn";
+      elVerifyBadge.textContent = "⚠️ تنبيه: لم يتم اعتماد مفتاحك العام في التطبيق بعد! اضغط الزر الأخضر في بطاقة إعداد المفتاح بالأعلى أولاً.";
+    }
+    elSummary.innerHTML = summaryHtml;
+    elTokenOut.textContent = token;
+    elResultSec.classList.remove("hidden");
+    copyTextToClipboard(token);
+  }
+
+  document.getElementById("btnGenerateLicense").addEventListener("click", function () {
+    if (!activePrivateScalar) {
+      elKeyCard.classList.remove("hidden");
+      showGenError("اضغط أولاً على «1️⃣ إنشاء مفتاحي السري الآن» في البطاقة العلوية (تُجرى لمرة واحدة فقط).");
+      return;
+    }
+    const deviceId = normalizeWesternHex(elDeviceId.value);
+    if (deviceId.length !== 16) {
+      showGenError("يرجى إدخال معرّف جهاز الزبون كاملاً (16 حرفاً ورقماً من شاشة التفعيل).");
+      return;
+    }
+    const kid = elKid.value.trim() || DEFAULT_KID;
+    const days = parseInt(elDays.value, 10);
+    if (!Number.isFinite(days) || days < 1 || days > 3650) {
+      showGenError("مدة الرخصة يجب أن تكون بين يوم واحد و 3650 يوماً.");
+      return;
+    }
+    const graceDays = elFullOffline.checked
+      ? days
+      : Math.min(days, Math.max(1, parseInt(elGraceDays.value, 10) || 30));
+
+    const nowMs = Date.now();
+    const expiresMs = nowMs + days * 86400 * 1000;
+    const graceUntilMs = Math.min(expiresMs, nowMs + graceDays * 86400 * 1000);
+    const edition = elEdition.value;
+
+    const payload = {
+      kid: kid,
+      device_id: deviceId,
+      type: edition,
+      issued_at: nowMs,
+      expires: expiresMs,
+      grace_until: graceUntilMs
+    };
+
+    const summary =
+      `<strong>الفئة:</strong> ${edition} &nbsp;|&nbsp; ` +
+      `<strong>الجهاز:</strong> <code>${deviceId}</code> &nbsp;|&nbsp; ` +
+      `<strong>المدة:</strong> ${days} يوم (ينتهي ${formatArabicDate(expiresMs)})`;
+
+    finalizeTokenDisplay(payload, summary);
+  });
+
+  document.getElementById("btnGenerateRecovery").addEventListener("click", function () {
+    if (!activePrivateScalar) {
+      elKeyCard.classList.remove("hidden");
+      showGenError("اضغط أولاً على «1️⃣ إنشاء مفتاحي السري الآن» في البطاقة العلوية.");
+      return;
+    }
+    const deviceId = normalizeWesternHex(elDeviceId.value);
+    if (deviceId.length !== 16) {
+      showGenError("يرجى إدخال معرّف الجهاز كاملاً (16 حرفاً ورقماً).");
+      return;
+    }
+    const kid = elKid.value.trim() || DEFAULT_KID;
+    const targetUser = (document.getElementById("targetUserInput").value || "admin").trim();
+    const hours = parseInt(document.getElementById("recoveryHoursInput").value, 10);
+    if (!Number.isFinite(hours) || hours < 1 || hours > 168) {
+      showGenError("صلاحية رمز الاسترجاع يجب أن تكون بين ساعة واحدة و 168 ساعة.");
+      return;
+    }
+
+    const nowMs = Date.now();
+    const expiresMs = nowMs + hours * 3600 * 1000;
+    const payload = {
+      kid: kid,
+      action: "RECOVERY",
+      device_id: deviceId,
+      target_user: targetUser,
+      issued_at: nowMs,
+      expires: expiresMs
+    };
+
+    const summary =
+      `<strong>استرجاع مستخدم:</strong> <code>${targetUser}</code> &nbsp;|&nbsp; ` +
+      `<strong>الجهاز:</strong> <code>${deviceId}</code> &nbsp;|&nbsp; ` +
+      `<strong>صالح حتى:</strong> ${formatArabicDate(expiresMs)}`;
+
+    finalizeTokenDisplay(payload, summary);
+  });
+
+  document.getElementById("btnCopyToken").addEventListener("click", function () {
+    const token = elTokenOut.textContent.trim();
+    if (!token) return;
+    copyTextToClipboard(token, function () {
+      const btn = document.getElementById("btnCopyToken");
+      const prev = btn.textContent;
+      btn.textContent = "✅ تم نسخ الرمز!";
+      setTimeout(function () { btn.textContent = prev; }, 2000);
+    });
+  });
+
+  document.getElementById("btnShareWhatsapp").addEventListener("click", function () {
+    const token = elTokenOut.textContent.trim();
+    if (!token) return;
+    window.open("https://wa.me/?text=" + encodeURIComponent(token), "_blank");
+  });
+
+  // استرجاع المفتاح المحفوظ محلياً في متصفح المالك تلقائياً إن وجد
+  try {
+    const savedPriv = localStorage.getItem(STORAGE_PRIV_KEY);
+    const savedKid = localStorage.getItem(STORAGE_KID_KEY);
+    if (savedKid) elKid.value = savedKid;
+    if (savedPriv) {
+      elPriv.value = savedPriv;
+      inspectEnteredKey(true);
+    }
+  } catch (_) {}
+})();
+</script>
+</body>
+</html>

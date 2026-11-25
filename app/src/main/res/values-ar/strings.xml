@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RM.POS</string>
+    <string name="title_pos">نقطة البيع (الكاشير)</string>
+    <string name="title_inventory">المخزون والمنتجات</string>
+    <string name="title_sales">فواتير المبيعات</string>
+    <string name="title_purchases">فواتير المشتريات</string>
+    <string name="title_clients">الزبائن والديون</string>
+    <string name="title_suppliers">الموردين والمستحقات</string>
+    <string name="title_expenses">المصاريف اليومية</string>
+    <string name="title_reports">التقارير والأرباح</string>
+    <string name="title_settings">الإعدادات العامة</string>
+    <string name="title_users">إدارة المستخدمين والصلاحيات</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_edit">تعديل</string>
+    <string name="action_search">بحث</string>
+    <string name="action_add">إضافة</string>
+    <string name="action_confirm">تأكيد</string>
+    <string name="action_close">إغلاق</string>
+    <string name="action_print">طباعة</string>
+    <string name="action_checkout">دفع / إتمام الفاتورة</string>
+    <string name="action_clear_cart">مسح السلة</string>
+    <string name="action_suspend">تعليق الفاتورة</string>
+    <string name="action_restore">استرجاع الفاتورة</string>
+    <string name="cart_total">الإجمالي</string>
+    <string name="cart_discount">الخصم</string>
+    <string name="cart_items_count">عدد البنود</string>
+    <string name="empty_cart">سلة المشتريات فارغة</string>
+    <string name="login_title">تسجيل الدخول للنظام</string>
+    <string name="login_username">اسم المستخدم</string>
+    <string name="login_pin">رمز المرور</string>
+    <string name="login_button">دخول</string>
+
+    <!-- Dashboard Screen Strings -->
+    <string name="dashboard_sync_ready">جاهز للنسخ السحابي</string>
+    <string name="dashboard_sync_now">مزامنة الآن</string>
+    <string name="dashboard_create_invoices">إنشاء الفواتير الجديدة</string>
+    <string name="dashboard_direct_access">إصدار فوري</string>
+    <string name="dashboard_btn_new_sale">+ بيع جديد</string>
+    <string name="dashboard_new_sale_title">فاتورة مبيعات جديدة</string>
+    <string name="dashboard_new_sale_desc">نقطة البيع، مسح الباركود، إصدار الوصل</string>
+    <string name="dashboard_btn_new_purchase">+ شراء جديد</string>
+    <string name="dashboard_new_purchase_title">فاتورة مشتريات جديدة</string>
+    <string name="dashboard_new_purchase_desc">تسجيل سلعة مورد وتحديث المخزون</string>
+
+    <!-- POS Register Screen Strings -->
+    <string name="pos_new_sale_title">إنشاء فاتورة مبيعات جديدة</string>
+    <string name="pos_new_sale_subtitle">نقطة البيع ومسح الباركود</string>
+    <string name="pos_tab_catalog">الكاتالوج</string>
+    <string name="pos_tab_invoices">سجل الفواتير</string>
+    <string name="pos_guest_client">عميل عام / غير مسجل</string>
+    <string name="pos_client_label">الزبون:</string>
+    <string name="pos_change_client">تغيير الزبون</string>
+    <string name="pos_search_placeholder">البحث بالاسم أو الباركود</string>
+    <string name="pos_category_all">الكل</string>
+    <string name="pos_product_families">+ عائلات المنتجات</string>
+    <string name="pos_shopping_cart">سلة المشتريات</string>
+    <string name="pos_clear_all">مسح الكل</string>
+    <string name="pos_total">المجموع</string>
+    <string name="pos_confirm_sale">تأكيد البيع</string>
+    <string name="pos_select_client_dialog">اختيار الزبون للفاتورة</string>
+    <string name="pos_search_client_placeholder">بحث بالاسم، الهاتف أو كودبار الزبون...</string>
+    <string name="pos_general_guest_client">عميل عام / زبون عادي (بدون حساب)</string>
+
+    <!-- Cart Screen Strings -->
+    <string name="cart_title">السلة</string>
+    <string name="cart_item_return">استرجاع / مرتجع</string>
+    <string name="cart_discount_label">خصم</string>
+    <string name="cart_subtotal_label">المجموع الفرعي</string>
+    <string name="cart_total_label">الإجمالي</string>
+    <string name="cart_suspend_label">حفظ مؤقتا</string>
+    <string name="cart_pay_label">دفع</string>
+    <string name="cart_action_more">المزيد</string>
+    <string name="cart_action_calc">آلة حاسبة</string>
+    <string name="cart_action_hold">انتظار</string>
+    <string name="cart_update_button">تحديث السلة</string>
+    <string name="cart_remove_button">حذف من السلة</string>
+
+    <!-- Sales Invoices Screen Strings -->
+    <string name="sales_title_clients">فواتير الزبناء</string>
+    <string name="sales_all">الكل</string>
+    <string name="sales_paid">مسددة</string>
+    <string name="sales_debt">مدينة</string>
+    <string name="sales_search_placeholder">بحث برقم الفاتورة أو اسم الزبون...</string>
+    <string name="sales_seller_label">البائع:</string>
+    <string name="sales_all_sellers">جميع البائعين</string>
+    <string name="sales_payment_cash">نقداً</string>
+    <string name="sales_payment_card">بطاقة بنكية</string>
+    <string name="sales_payment_debt">دين</string>
+    <string name="sales_payment_bank">تحويل بنكي</string>
+    <string name="sales_edit_title">تعديل فاتورة مبيعات</string>
+    <string name="sales_sold_items">الأصناف المباعة:</string>
+    <string name="sales_received_amount">المبلغ المستلم / المدفوع (د.م)</string>
+    <string name="sales_remaining_debt">المتبقي كدين على الزبون:</string>
+    <string name="sales_change_return">الفكة المسترجعة:</string>
+    <string name="sales_save_changes">حفظ التعديلات</string>
+    <string name="sales_permission_edit_denied">عذراً، صلاحية تعديل الفواتير معطلة لحسابك. يرجى مراجعة المسؤول.</string>
+    <string name="sales_permission_delete_denied">عذراً، ليس لديك صلاحية حذف الفواتير. مقتصر على المدير.</string>
+    <string name="sales_invoice_settled">تم تسديد وتأكيد الفاتورة بنجاح</string>
+    <string name="sales_invoice_marked_debt">تم تحويل الفاتورة إلى دين بنجاح</string>
+
+    <!-- Unified Multilingual Dictionary Resources (Bilingual.get) -->
+    <string name="dict_app_title">نقاط بيع السوبرماركت</string>
+    <string name="dict_login">تسجيل الدخول</string>
+    <string name="dict_username">اسم المستخدم</string>
+    <string name="dict_password">كلمة المرور</string>
+    <string name="dict_remember_me">تذكرني</string>
+    <string name="dict_fingerprint">تسجيل بالبصمة</string>
+    <string name="dict_manager">مدير</string>
+    <string name="dict_cashier">كاشير</string>
+    <string name="dict_login_error">اسم المستخدم أو كلمة المرور غير صالحة</string>
+
+    <string name="dict_sales_today">مبيعات اليوم</string>
+    <string name="dict_profit_today">أرباح اليوم</string>
+    <string name="dict_invoice_count">عدد الفواتير</string>
+    <string name="dict_customer_count">عدد العملاء</string>
+    <string name="dict_product_count">عدد المنتجات</string>
+    <string name="dict_low_stock">منخفض المخزون</string>
+    <string name="dict_recent_ops">آخر العمليات</string>
+
+    <string name="dict_new_sale_btn">بيع جديد</string>
+    <string name="dict_add_prod_btn">إضافة منتج</string>
+    <string name="dict_inventory_btn">المخزون</string>
+    <string name="dict_customers_btn">العملاء</string>
+    <string name="dict_reports_btn">التقارير</string>
+    <string name="dict_pos_btn">نقطة البيع</string>
+    <string name="dict_clients_btn">العملاء</string>
+    <string name="dict_expenses_btn">المصاريف</string>
+    <string name="dict_settings_btn">الإعدادات</string>
+    <string name="dict_dashboard_btn">الرئيسية</string>
+    <string name="dict_dashboard">نظرة عامة</string>
+    <string name="dict_suppliers_btn">الموردين</string>
+    <string name="dict_purchases_btn">المشتريات</string>
+    <string name="dict_payments_btn">المدفوعات</string>
+
+    <string name="dict_search_by_name">البحث بالاسم / الباركود...</string>
+    <string name="dict_scan_barcode">ماسح الباركود</string>
+    <string name="dict_product">المنتج</string>
+    <string name="dict_quantity">الكمية</string>
+    <string name="dict_unit_price">سعر الوحدة</string>
+    <string name="dict_total">الإجمالي</string>
+    <string name="dict_subtotal">المجموع الفرعي</string>
+    <string name="dict_discount">خصم</string>
+    <string name="dict_discount_type">نوع الخصم</string>
+    <string name="dict_suspend_sale">تعليق الفاتورة</string>
+    <string name="dict_recalled_sales">فواتير الانتظار</string>
+    <string name="dict_open_drawer">فتح درج النقود</string>
+    <string name="dict_drawer_opened">تم فتح درج النقود بنجاح !</string>
+    <string name="dict_checkout">إتمام الدفع</string>
+    <string name="dict_clear_cart">تفريغ السلة</string>
+    <string name="dict_product_added">تمت إضافة المنتج للسلة</string>
+
+    <string name="dict_payment_method">طريقة الدفع</string>
+    <string name="dict_cash">نقدي</string>
+    <string name="dict_card">بطاقة بنكية</string>
+    <string name="dict_bank">تحويل بنكي</string>
+    <string name="dict_mixed">مختلط / متعدد</string>
+    <string name="dict_received_amount">المبلغ المستلم</string>
+    <string name="dict_change_amount">الباقي للعميل</string>
+    <string name="dict_finalize">تأكيد وطباعة</string>
+    <string name="dict_client_debit_added">تنبيه: تم تسجيل دين على العميل</string>
+
+    <string name="dict_barcode">الباركود</string>
+    <string name="dict_name_ar">الاسم</string>
+    <string name="dict_description">الوصف</string>
+    <string name="dict_category">التصنيف</string>
+    <string name="dict_unit">الوحدة</string>
+    <string name="dict_purchase_price">ثمن الشراء (تكلفة)</string>
+    <string name="dict_selling_price">ثمن البيع (مفرد)</string>
+    <string name="dict_wholesale_price">سعر الجملة</string>
+    <string name="dict_special_price">سعر خاص</string>
+    <string name="dict_initial_stock">الكمية الحالية</string>
+    <string name="dict_min_stock_alert">الحد الأدنى للتنبيه</string>
+    <string name="dict_save">حفظ البيانات</string>
+    <string name="dict_select_category">اختر التصنيف</string>
+    <string name="dict_new_category">تصنيف جديد</string>
+
+    <string name="dict_calc_title">حاسبة التغيير السريع</string>
+    <string name="dict_retrieve_invoices">استرجاع الفواتير وسجل العمليات</string>
+    <string name="dict_invoice_no">رقم الفاتورة</string>
+    <string name="dict_void_invoice">فواتير مدينة / ديون</string>
+    <string name="dict_reprint">إعادة طباعة</string>
+    <string name="dict_status_success">مكتمل</string>
+    <string name="dict_status_voided">مدينة</string>
+    <string name="dict_status_debt">مدينة</string>
+    <string name="dict_status_paid">مسددة</string>
+    <string name="dict_settle_debt">تسديد الفاتورة</string>
+
+    <string name="dict_stock_movements">سجل حركة المخزون</string>
+    <string name="dict_type">النوع</string>
+    <string name="dict_notes">ملاحظات</string>
+    <string name="dict_inflow">دخول</string>
+    <string name="dict_outflow">خروج</string>
+
+    <string name="dict_phone">الهاتف</string>
+    <string name="dict_address">العنوان</string>
+    <string name="dict_email">البريد الإلكتروني</string>
+    <string name="dict_balance_debit">الرصيد / الديون</string>
+    <string name="dict_total_spend">إجمالي المشتريات</string>
+    <string name="dict_add_customer">إضافة عميل</string>
+    <string name="dict_add_supplier">إضافة مورد</string>
+    <string name="dict_supplier_debt">ديون المورد</string>
+
+    <string name="dict_supplier">المورد</string>
+    <string name="dict_paid_amount">المبلغ المدفوع</string>
+    <string name="dict_record_purchase">إنشاء فاتورة توريد شحن</string>
+
+    <string name="dict_sales_period_report">تقرير المبيعات والربحية</string>
+    <string name="dict_weekly_report">التقرير الأسبوعي</string>
+    <string name="dict_monthly_report">التقرير الشهري</string>
+    <string name="dict_best_sellers">المنتجات الأكثر مبيعاً</string>
+    <string name="dict_expenses">إدارة المصاريف اليومية</string>
+    <string name="dict_add_expense">إضافة مصروف</string>
+    <string name="dict_expense_title">عنوان المصروف</string>
+    <string name="dict_amount">المبلغ</string>
+    <string name="dict_total_profits">صافي الأرباح المقدرة</string>
+
+    <string name="dict_export_pdf">تصدير الفاتورة الرئيسية</string>
+    <string name="dict_export_excel">تصدير جدول البيانات للتقارير</string>
+    <string name="dict_backup_btn">النسخ الاحتياطي للنظام</string>
+    <string name="dict_restore_btn">استرجاع النسخة الاحتياطية</string>
+    <string name="dict_backup_success">تم تخزين نسخة احتياطية محلية!</string>
+    <string name="dict_restore_success">تم استرجاع النظام بنجاح!</string>
+
+    <string name="dict_settings">إعدادات النظام والمحل</string>
+    <string name="dict_shop_name">اسم السوبرماركت</string>
+    <string name="dict_receipt_header">رأس الفاتورة</string>
+    <string name="dict_receipt_footer">تذييل الفاتورة</string>
+    <string name="dict_users_management">إدارة المستخدمين والصلاحيات</string>
+
+    <!-- Domain Error Messages -->
+    <string name="err_permission_denied">عذراً، ليس لديك الصلاحية اللازمة لتنفيذ هذه العملية</string>
+    <string name="err_insufficient_stock">الكمية المطلوبة تتجاوز المخزون المتوفر</string>
+    <string name="err_invalid_amount">القيمة أو الكمية المدخلة غير صالحة</string>
+    <string name="err_empty_items">لا يمكن إتمام العملية لأن القائمة فارغة</string>
+    <string name="err_record_not_found">السجل أو الفاتورة المطلوبة غير موجودة</string>
+    <string name="err_duplicate_invoice_number">رقم الفاتورة مستخدم بالفعل في فاتورة أخرى</string>
+    <string name="err_geo_fence_blocked">لا يمكن إتمام الفاتورة خارج النطاق الجغرافي المحدد للزبون</string>
+    <string name="err_database_constraint">تعارض في بيانات القاعدة منع حفظ العملية</string>
+    <string name="err_unknown">حدث خطأ غير متوقع أثناء تنفيذ العملية</string>
+
+    <!-- Licensing, Printer, Backup & Map Strings -->
+    <string name="lic_title">ترخيص مشفّر وموقّع رقمياً (ECDSA P-256)</string>
+    <string name="lic_subtitle">مرتبط بمعرّف هذا الجهاز مع فترة سماح موقّعة للعمل دون إنترنت</string>
+    <string name="lic_device_id_label">معرّف الجهاز (Device ID)</string>
+    <string name="lic_copy_device_id">نسخ معرّف الجهاز</string>
+    <string name="lic_copied_toast">تم نسخ معرّف الجهاز إلى الحافظة</string>
+    <string name="lic_active_badge">مفعّل رسمياً (موقّع)</string>
+    <string name="lic_inactive_badge">يتطلب تفعيل الرخصة</string>
+    <string name="lic_key_id_label">معرّف مفتاح التوقيع (kid)</string>
+    <string name="lic_expires_label">تاريخ انتهاء الاشتراك</string>
+    <string name="lic_grace_remaining_label">فترة السماح دون إنترنت</string>
+    <string name="lic_renew_online_btn">تجديد فترة السماح عبر الخادم</string>
+    <string name="lic_activate_btn">التحقق وتفعيل الرمز الموقّع</string>
+    <string name="lic_deactivate_btn">إلغاء ربط الرخصة</string>
+    <string name="lic_token_placeholder">الصق رمز ECDSA الموقّع (payload.signature)</string>
+
+    <string name="printer_bt_title">طابعة حرارية بلوتوث</string>
+    <string name="printer_wifi_title">طابعة شبكة Wi-Fi / LAN</string>
+    <string name="printer_system_title">طباعة النظام ومعاينة PDF</string>
+    <string name="printer_test_btn">طباعة تجريبية</string>
+    <string name="printer_connected_badge">متصل</string>
+    <string name="printer_disconnected_badge">غير متصل</string>
+    <string name="printer_reconnecting_badge">جاري إعادة الاتصال...</string>
+    <string name="printer_permission_required">إذن البلوتوث مطلوب للطباعة</string>
+
+    <string name="backup_encrypted_badge">مشفّر بمعيار AES-256-GCM</string>
+    <string name="backup_export_reminder_title">تذكير بالتصدير الاحتياطي الخارجي</string>
+    <string name="backup_export_now_btn">تصدير نسخة مشفّرة الآن</string>
+    <string name="backup_failed_toast">تعذر تنفيذ عملية النسخ الاحتياطي</string>
+
+    <string name="map_picker_title">تحديد موقع المتجر أو الزبون</string>
+    <string name="map_osm_attribution">بيانات الخريطة © مساهمو OpenStreetMap</string>
+</resources>

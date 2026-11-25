@@ -1,0 +1,117 @@
+name: Android CI (Build, Tests, Lint, Detekt, Release Verification & Secret Scan)
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build, Unit/Compose Tests, Lint, Detekt, Release Check & Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run private-key & secret pre-commit scanner
+        run: python3 tools/check_secrets_precommit.py --all
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Generate ephemeral debug keystore for CI build
+        run: |
+          if [ ! -f debug.keystore ]; then
+            keytool -genkeypair -v -keystore debug.keystore \
+              -storepass android -alias androiddebugkey -keypass android \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
+      - name: Ensure Gradle Wrapper is executable
+        run: chmod +x gradlew
+
+      - name: Set up Gradle caching
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build Debug APK
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Run JVM Unit & Robolectric Compose UI Tests
+        run: ./gradlew :app:testDebugUnitTest --no-daemon --stacktrace
+
+      - name: Run Android Lint
+        run: ./gradlew :app:lintDebug --no-daemon
+
+      - name: Verify release build fails when LICENSE_SERVER_URL is empty
+        run: |
+          if LICENSE_SERVER_URL="" ./gradlew :app:verifyReleaseLicenseServerUrl --no-daemon; then
+            echo "ERROR: verifyReleaseLicenseServerUrl succeeded with empty LICENSE_SERVER_URL!"
+            exit 1
+          else
+            echo "OK: verifyReleaseLicenseServerUrl properly rejected empty LICENSE_SERVER_URL."
+          fi
+
+      - name: Verify release build fails when MAP_TILE_URL_TEMPLATE points to public OSM or non-HTTPS
+        run: |
+          if MAP_TILE_URL_TEMPLATE="http://example.invalid/{z}/{x}/{y}.png" ./gradlew :app:verifyReleaseMapTileProvider --no-daemon; then
+            echo "ERROR: verifyReleaseMapTileProvider allowed non-HTTPS MAP_TILE_URL_TEMPLATE!"
+            exit 1
+          fi
+          if MAP_TILE_URL_TEMPLATE="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ./gradlew :app:verifyReleaseMapTileProvider --no-daemon; then
+            echo "ERROR: verifyReleaseMapTileProvider allowed public OSM tile server!"
+            exit 1
+          fi
+          echo "OK: verifyReleaseMapTileProvider properly rejected non-HTTPS and public OSM URLs."
+
+      - name: Build Release APK (ephemeral CI signing key & test env values - NEVER DISTRIBUTE)
+        env:
+          KEYSTORE_PATH: /tmp/ci-ephemeral-upload-key.jks
+          STORE_PASSWORD: ci-ephemeral-store-pass-not-for-distribution
+          KEY_PASSWORD: ci-ephemeral-key-pass-not-for-distribution
+          LICENSE_SERVER_URL: https://license-ci-test.invalid
+          MAP_TILE_URL_TEMPLATE: https://tiles-ci-test.invalid/maps/streets-v2/{z}/{x}/{y}.png?key=ci-test-placeholder
+          MAP_TILE_ATTRIBUTION: "&copy; CI Test Map Provider"
+        run: |
+          rm -f "$KEYSTORE_PATH"
+          keytool -genkeypair -v -keystore "$KEYSTORE_PATH" \
+            -storepass "$STORE_PASSWORD" -alias upload -keypass "$KEY_PASSWORD" \
+            -keyalg RSA -keysize 2048 -validity 1 \
+            -dname "CN=RM.POS CI Ephemeral Test Only,O=CI,C=US"
+          ./gradlew :app:assembleRelease --no-daemon --stacktrace
+          # Remove ephemeral keystore and test-signed release APK immediately;
+          # CI test-signed release APKs are strictly for R8/packaging verification and MUST NEVER be distributed.
+          rm -f "$KEYSTORE_PATH"
+          rm -rf app/build/outputs/apk/release
+
+      - name: Run Detekt Static Analysis
+        run: |
+          curl -sSL https://github.com/detekt/detekt/releases/download/v1.23.8/detekt-cli-1.23.8-all.jar -o /tmp/detekt-cli.jar
+          java -jar /tmp/detekt-cli.jar \
+            --input app/src/main/java \
+            --config config/detekt/detekt.yml \
+            --report html:app/build/reports/detekt/detekt.html \
+            --report xml:app/build/reports/detekt/detekt.xml
+
+      - name: Upload Test, Lint & Detekt Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-ci-reports
+          path: |
+            app/build/reports/tests/testDebugUnitTest/
+            app/build/reports/lint-results-debug.html
+            app/build/reports/lint-results-debug.xml
+            app/build/reports/detekt/
+          retention-days: 14

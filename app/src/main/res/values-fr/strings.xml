@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RM.POS</string>
+    <string name="title_pos">Point de Vente (Caisse)</string>
+    <string name="title_inventory">Stock &amp; Produits</string>
+    <string name="title_sales">Factures de Ventes</string>
+    <string name="title_purchases">Factures d\'Achats</string>
+    <string name="title_clients">Clients &amp; Crédits</string>
+    <string name="title_suppliers">Fournisseurs</string>
+    <string name="title_expenses">Dépenses Journalières</string>
+    <string name="title_reports">Rapports &amp; Bénéfices</string>
+    <string name="title_settings">Paramètres Généraux</string>
+    <string name="title_users">Gestion des Utilisateurs</string>
+    <string name="action_save">Enregistrer</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="action_delete">Supprimer</string>
+    <string name="action_edit">Modifier</string>
+    <string name="action_search">Rechercher</string>
+    <string name="action_add">Ajouter</string>
+    <string name="action_confirm">Confirmer</string>
+    <string name="action_close">Fermer</string>
+    <string name="action_print">Imprimer</string>
+    <string name="action_checkout">Payer / Encaisser</string>
+    <string name="action_clear_cart">Vider le Panier</string>
+    <string name="action_suspend">Mettre en Attente</string>
+    <string name="action_restore">Restaurer Facture</string>
+    <string name="cart_total">Total</string>
+    <string name="cart_discount">Remise</string>
+    <string name="cart_items_count">Nombre d\'Articles</string>
+    <string name="empty_cart">Le panier est vide</string>
+    <string name="login_title">Connexion au Système</string>
+    <string name="login_username">Nom d\'utilisateur</string>
+    <string name="login_pin">Code PIN</string>
+    <string name="login_button">Se Connecter</string>
+
+    <!-- Dashboard Screen Strings -->
+    <string name="dashboard_sync_ready">Prêt pour sauvegarde</string>
+    <string name="dashboard_sync_now">Sync</string>
+    <string name="dashboard_create_invoices">Création des Factures</string>
+    <string name="dashboard_direct_access">Accès Direct</string>
+    <string name="dashboard_btn_new_sale">+ Vente</string>
+    <string name="dashboard_new_sale_title">Facture de Vente</string>
+    <string name="dashboard_new_sale_desc">Scanner, caisse et ticket de caisse</string>
+    <string name="dashboard_btn_new_purchase">+ Achat</string>
+    <string name="dashboard_new_purchase_title">Facture d\'Achat</string>
+    <string name="dashboard_new_purchase_desc">Entrée marchandise et stock</string>
+
+    <!-- POS Register Screen Strings -->
+    <string name="pos_new_sale_title">Nouvelle Facture de Vente</string>
+    <string name="pos_new_sale_subtitle">Point de Vente &amp; Code-barres</string>
+    <string name="pos_tab_catalog">Catalogue</string>
+    <string name="pos_tab_invoices">Factures</string>
+    <string name="pos_guest_client">Client de passage</string>
+    <string name="pos_client_label">Client :</string>
+    <string name="pos_change_client">Changer</string>
+    <string name="pos_search_placeholder">Recherche par nom ou code-barres</string>
+    <string name="pos_category_all">Tous</string>
+    <string name="pos_product_families">+ Familles</string>
+    <string name="pos_shopping_cart">Panier d\'achats</string>
+    <string name="pos_clear_all">Vider</string>
+    <string name="pos_total">Total</string>
+    <string name="pos_confirm_sale">Confirmer la vente</string>
+    <string name="pos_select_client_dialog">Sélectionner le Client</string>
+    <string name="pos_search_client_placeholder">Recherche nom, tél ou code-barres...</string>
+    <string name="pos_general_guest_client">Client de passage</string>
+
+    <!-- Cart Screen Strings -->
+    <string name="cart_title">Panier</string>
+    <string name="cart_item_return">Retour</string>
+    <string name="cart_discount_label">Remise</string>
+    <string name="cart_subtotal_label">Sous-total</string>
+    <string name="cart_total_label">Total</string>
+    <string name="cart_suspend_label">Suspendre</string>
+    <string name="cart_pay_label">Payer</string>
+    <string name="cart_action_more">Plus</string>
+    <string name="cart_action_calc">Calc</string>
+    <string name="cart_action_hold">Attente</string>
+    <string name="cart_update_button">Mettre à jour</string>
+    <string name="cart_remove_button">Supprimer</string>
+
+    <!-- Sales Invoices Screen Strings -->
+    <string name="sales_title_clients">Factures Clients</string>
+    <string name="sales_all">Tous</string>
+    <string name="sales_paid">Complètes</string>
+    <string name="sales_debt">À Crédit (Dettes)</string>
+    <string name="sales_search_placeholder">Recherche par N° facture ou client...</string>
+    <string name="sales_seller_label">Vendeur :</string>
+    <string name="sales_all_sellers">Tous les vendeurs</string>
+    <string name="sales_payment_cash">Espèces</string>
+    <string name="sales_payment_card">Carte</string>
+    <string name="sales_payment_debt">Crédit</string>
+    <string name="sales_payment_bank">Virement</string>
+    <string name="sales_edit_title">Modifier Vente</string>
+    <string name="sales_sold_items">Articles vendus :</string>
+    <string name="sales_received_amount">Montant reçu (DH)</string>
+    <string name="sales_remaining_debt">Reste (Crédit) :</string>
+    <string name="sales_change_return">Monnaie :</string>
+    <string name="sales_save_changes">Enregistrer</string>
+    <string name="sales_permission_edit_denied">Modification des factures désactivée.</string>
+    <string name="sales_permission_delete_denied">Suppression de facture non autorisée.</string>
+    <string name="sales_invoice_settled">Facture validée avec succès</string>
+    <string name="sales_invoice_marked_debt">Facture marquée à crédit</string>
+
+    <!-- Unified Multilingual Dictionary Resources (Bilingual.get) -->
+    <string name="dict_app_title">Supermarché POS</string>
+    <string name="dict_login">Se Connecter</string>
+    <string name="dict_username">Nom d\'utilisateur</string>
+    <string name="dict_password">Mot de passe PIN</string>
+    <string name="dict_remember_me">Se souvenir de moi</string>
+    <string name="dict_fingerprint">Scanner Biométrique</string>
+    <string name="dict_manager">Gérant</string>
+    <string name="dict_cashier">Caissier</string>
+    <string name="dict_login_error">Nom d\'utilisateur ou PIN incorrect</string>
+
+    <string name="dict_sales_today">Ventes du Jour</string>
+    <string name="dict_profit_today">Bénéfice du Jour</string>
+    <string name="dict_invoice_count">Nombre de Factures</string>
+    <string name="dict_customer_count">Nombre de Clients</string>
+    <string name="dict_product_count">Nombre de Produits</string>
+    <string name="dict_low_stock">Stock Faible</string>
+    <string name="dict_recent_ops">Dernières Opérations</string>
+
+    <string name="dict_new_sale_btn">POS / Vente</string>
+    <string name="dict_add_prod_btn">Nouveau Produit</string>
+    <string name="dict_inventory_btn">Stock</string>
+    <string name="dict_customers_btn">Clients</string>
+    <string name="dict_reports_btn">Rapports</string>
+    <string name="dict_pos_btn">Vente</string>
+    <string name="dict_clients_btn">Clients</string>
+    <string name="dict_expenses_btn">Dépenses</string>
+    <string name="dict_settings_btn">Paramètres</string>
+    <string name="dict_dashboard_btn">Accueil</string>
+    <string name="dict_dashboard">Tableau de Bord</string>
+    <string name="dict_suppliers_btn">Fournisseurs</string>
+    <string name="dict_purchases_btn">Achats</string>
+    <string name="dict_payments_btn">Paiements</string>
+
+    <string name="dict_search_by_name">Recherche par nom / code...</string>
+    <string name="dict_scan_barcode">Scanner Barcode</string>
+    <string name="dict_product">Produit</string>
+    <string name="dict_quantity">Quantité</string>
+    <string name="dict_unit_price">Prix Unitaire</string>
+    <string name="dict_total">Total</string>
+    <string name="dict_subtotal">Sous-Total</string>
+    <string name="dict_discount">Remise</string>
+    <string name="dict_discount_type">Type Remise</string>
+    <string name="dict_suspend_sale">Mettre en attente</string>
+    <string name="dict_recalled_sales">Ventes Suspendues</string>
+    <string name="dict_open_drawer">Ouvrir Tiroir (ESC/POS)</string>
+    <string name="dict_drawer_opened">Tiroir-caisse ouvert avec succès !</string>
+    <string name="dict_checkout">Payer &amp; Facturer</string>
+    <string name="dict_clear_cart">Vider le panier</string>
+    <string name="dict_product_added">Produit ajouté au panier</string>
+
+    <string name="dict_payment_method">Mode de règlement</string>
+    <string name="dict_cash">Espèces</string>
+    <string name="dict_card">Carte Bancaire</string>
+    <string name="dict_bank">Virement</string>
+    <string name="dict_mixed">Mixte</string>
+    <string name="dict_received_amount">Montant Reçu</string>
+    <string name="dict_change_amount">Reste à rendre</string>
+    <string name="dict_finalize">Valider &amp; Imprimer</string>
+    <string name="dict_client_debit_added">Débit client enregistré</string>
+
+    <string name="dict_barcode">Code à barres</string>
+    <string name="dict_name_ar">Nom</string>
+    <string name="dict_description">Description</string>
+    <string name="dict_category">Catégorie</string>
+    <string name="dict_unit">Unité</string>
+    <string name="dict_purchase_price">Prix d\'achat</string>
+    <string name="dict_selling_price">Prix de vente public</string>
+    <string name="dict_wholesale_price">Prix de gros</string>
+    <string name="dict_special_price">Prix spécial</string>
+    <string name="dict_initial_stock">Stock actuel</string>
+    <string name="dict_min_stock_alert">Stock minimum</string>
+    <string name="dict_save">Enregistrer</string>
+    <string name="dict_select_category">Choisir catégorie</string>
+    <string name="dict_new_category">Nouvelle catégorie</string>
+
+    <string name="dict_calc_title">Calculette Rapide</string>
+    <string name="dict_retrieve_invoices">Historique des factures</string>
+    <string name="dict_invoice_no">Numéro facture</string>
+    <string name="dict_void_invoice">Factures à Crédit</string>
+    <string name="dict_reprint">Réimprimer</string>
+    <string name="dict_status_success">Validé</string>
+    <string name="dict_status_voided">À Crédit</string>
+    <string name="dict_status_debt">À Crédit</string>
+    <string name="dict_status_paid">Payée</string>
+    <string name="dict_settle_debt">Régler la facture</string>
+
+    <string name="dict_stock_movements">Mouvements de Stock</string>
+    <string name="dict_type">Type</string>
+    <string name="dict_notes">Notes</string>
+    <string name="dict_inflow">Entrée</string>
+    <string name="dict_outflow">Sortie</string>
+
+    <string name="dict_phone">Téléphone</string>
+    <string name="dict_address">Adresse</string>
+    <string name="dict_email">E-mail</string>
+    <string name="dict_balance_debit">Solde Débiteur</string>
+    <string name="dict_total_spend">Total Achats</string>
+    <string name="dict_add_customer">Nouveau Client</string>
+    <string name="dict_add_supplier">Nouveau Fournisseur</string>
+    <string name="dict_supplier_debt">Dettes Fournisseur</string>
+
+    <string name="dict_supplier">Fournisseur</string>
+    <string name="dict_paid_amount">Montant Payé</string>
+    <string name="dict_record_purchase">Nouvelle Facture Fournisseur</string>
+
+    <string name="dict_sales_period_report">Rapport des Ventes</string>
+    <string name="dict_weekly_report">Rapport Hebdomadaire</string>
+    <string name="dict_monthly_report">Rapport Mensuel</string>
+    <string name="dict_best_sellers">Palmarès Produits</string>
+    <string name="dict_expenses">Dépenses</string>
+    <string name="dict_add_expense">Engager dépense</string>
+    <string name="dict_expense_title">Libellé de dépense</string>
+    <string name="dict_amount">Montant</string>
+    <string name="dict_total_profits">Bénéfice Net Estimé</string>
+
+    <string name="dict_export_pdf">Exporter PDF</string>
+    <string name="dict_export_excel">Exporter CSV/Excel</string>
+    <string name="dict_backup_btn">Sauvegarde DB</string>
+    <string name="dict_restore_btn">Restaurer DB</string>
+    <string name="dict_backup_success">Sauvegarde locale créée !</string>
+    <string name="dict_restore_success">Restauration terminée !</string>
+
+    <string name="dict_settings">Paramètres</string>
+    <string name="dict_shop_name">Nom d\'Enseigne</string>
+    <string name="dict_receipt_header">En-tête Ticket</string>
+    <string name="dict_receipt_footer">Pied de Ticket</string>
+    <string name="dict_users_management">Gestion Utilisateurs</string>
+
+    <!-- Domain Error Messages -->
+    <string name="err_permission_denied">Accès refusé : autorisation insuffisante pour cette opération</string>
+    <string name="err_insufficient_stock">La quantité demandée dépasse le stock disponible</string>
+    <string name="err_invalid_amount">Montant ou quantité invalide</string>
+    <string name="err_empty_items">Impossible de valider une liste vide</string>
+    <string name="err_record_not_found">Enregistrement ou facture introuvable</string>
+    <string name="err_duplicate_invoice_number">Ce numéro de facture est déjà utilisé</string>
+    <string name="err_geo_fence_blocked">Opération bloquée hors zone géographique du client</string>
+    <string name="err_database_constraint">Contrainte de base de données détectée</string>
+    <string name="err_unknown">Une erreur inattendue est survenue</string>
+
+    <!-- Licensing, Printer, Backup & Map Strings -->
+    <string name="lic_title">Licence Cryptographique (ECDSA P-256)</string>
+    <string name="lic_subtitle">Liée à cet appareil avec période de grâce hors-ligne signée</string>
+    <string name="lic_device_id_label">ID de l\'appareil</string>
+    <string name="lic_copy_device_id">Copier l\'ID</string>
+    <string name="lic_copied_toast">ID de l\'appareil copié</string>
+    <string name="lic_active_badge">Activée (Signée)</string>
+    <string name="lic_inactive_badge">Activation Requise</string>
+    <string name="lic_key_id_label">Identifiant de clé (kid)</string>
+    <string name="lic_expires_label">Expiration de l\'abonnement</string>
+    <string name="lic_grace_remaining_label">Grâce hors-ligne</string>
+    <string name="lic_renew_online_btn">Renouveler la période en ligne</string>
+    <string name="lic_activate_btn">Vérifier &amp; Activer le Jeton</string>
+    <string name="lic_deactivate_btn">Désactiver la Licence</string>
+    <string name="lic_token_placeholder">Collez le jeton ECDSA signé (payload.signature)</string>
+
+    <string name="printer_bt_title">Imprimante Thermique Bluetooth</string>
+    <string name="printer_wifi_title">Imprimante Réseau Wi-Fi / LAN</string>
+    <string name="printer_system_title">Impression Système &amp; Aperçu PDF</string>
+    <string name="printer_test_btn">Test d\'impression</string>
+    <string name="printer_connected_badge">Connectée</string>
+    <string name="printer_disconnected_badge">Déconnectée</string>
+    <string name="printer_reconnecting_badge">Reconnexion...</string>
+    <string name="printer_permission_required">Autorisation Bluetooth requise pour imprimer</string>
+
+    <string name="backup_encrypted_badge">Chiffrée AES-256-GCM</string>
+    <string name="backup_export_reminder_title">Rappel d\'Export Externe</string>
+    <string name="backup_export_now_btn">Exporter Sauvegarde Chiffrée</string>
+    <string name="backup_failed_toast">Échec de la sauvegarde</string>
+
+    <string name="map_picker_title">Sélectionner l\'adresse sur la carte</string>
+    <string name="map_osm_attribution">Données cartographiques © les contributeurs d\'OpenStreetMap</string>
+</resources>
