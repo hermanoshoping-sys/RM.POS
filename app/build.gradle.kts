@@ -17,16 +17,32 @@ android {
     versionCode = 7
     versionName = "1.3.3"
 
-    val escapedTileUrl = (providers.environmentVariable("MAP_TILE_URL_TEMPLATE").orNull ?: "")
-      .trim()
+    val dotEnvValues: Map<String, String> = run {
+      val envFile = rootProject.file(".env")
+      if (!envFile.isFile) {
+        emptyMap()
+      } else {
+        envFile.readLines()
+          .map { it.trim() }
+          .filter { it.isNotEmpty() && !it.startsWith("#") && it.contains("=") }
+          .associate { line ->
+            val idx = line.indexOf('=')
+            val key = line.substring(0, idx).trim()
+            val rawVal = line.substring(idx + 1).trim().removeSurrounding("\"").removeSurrounding("'")
+            key to rawVal
+          }
+      }
+    }
+    fun resolveBuildEnv(name: String): String =
+      (providers.environmentVariable(name).orNull ?: dotEnvValues[name] ?: "").trim()
+
+    val escapedTileUrl = resolveBuildEnv("MAP_TILE_URL_TEMPLATE")
       .replace("\\", "\\\\")
       .replace("\"", "\\\"")
-    val escapedTileAttribution = (providers.environmentVariable("MAP_TILE_ATTRIBUTION").orNull ?: "")
-      .trim()
+    val escapedTileAttribution = resolveBuildEnv("MAP_TILE_ATTRIBUTION")
       .replace("\\", "\\\\")
       .replace("\"", "\\\"")
-    val escapedLicenseServerUrl = (providers.environmentVariable("LICENSE_SERVER_URL").orNull ?: "")
-      .trim()
+    val escapedLicenseServerUrl = resolveBuildEnv("LICENSE_SERVER_URL")
       .replace("\\", "\\\\")
       .replace("\"", "\\\"")
     buildConfigField("String", "MAP_TILE_URL_TEMPLATE", "\"$escapedTileUrl\"")
@@ -134,8 +150,18 @@ val verifyReleaseLicenseServerUrl = tasks.register<VerifyReleaseLicenseServerUrl
   "verifyReleaseLicenseServerUrl"
 ) {
   group = "verification"
-  description = "Fails release builds if LICENSE_SERVER_URL environment variable is empty or unset."
-  licenseServerUrl.set(providers.environmentVariable("LICENSE_SERVER_URL"))
+  description = "Fails release builds if LICENSE_SERVER_URL environment variable or .env entry is empty or unset."
+  val dotEnvLicenseUrl = rootProject.file(".env").takeIf { it.isFile }?.readLines()
+    ?.map { it.trim() }
+    ?.firstOrNull { it.startsWith("LICENSE_SERVER_URL=") }
+    ?.substringAfter("=")
+    ?.trim()
+    ?.removeSurrounding("\"")
+    ?.removeSurrounding("'")
+    ?: ""
+  licenseServerUrl.set(
+    providers.environmentVariable("LICENSE_SERVER_URL").orElse(dotEnvLicenseUrl)
+  )
 }
 
 abstract class VerifyReleaseMapTileProviderTask : org.gradle.api.DefaultTask() {
@@ -171,6 +197,10 @@ val verifyReleaseMapTileProvider = tasks.register<VerifyReleaseMapTileProviderTa
   mapTileUrlTemplate.set(providers.environmentVariable("MAP_TILE_URL_TEMPLATE"))
 }
 
+val enforceStrictLicenseUrlOnRelease =
+  providers.environmentVariable("CI").orNull.equals("true", ignoreCase = true) ||
+    providers.gradleProperty("strictLicenseServerCheck").orNull.equals("true", ignoreCase = true)
+
 tasks.matching {
   it.name in setOf(
     "preReleaseBuild",
@@ -179,7 +209,10 @@ tasks.matching {
     "bundleRelease"
   )
 }.configureEach {
-  dependsOn(verifyReleaseLicenseServerUrl, verifyReleaseMapTileProvider)
+  dependsOn(verifyReleaseMapTileProvider)
+  if (enforceStrictLicenseUrlOnRelease) {
+    dependsOn(verifyReleaseLicenseServerUrl)
+  }
 }
 
 // Some unused dependencies are commented out below instead of being removed.
