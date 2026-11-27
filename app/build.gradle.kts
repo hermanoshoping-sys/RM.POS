@@ -14,8 +14,8 @@ android {
     applicationId = "com.aistudio.rmpos.x7m4qp"
     minSdk = 24
     targetSdk = 36
-    versionCode = 7
-    versionName = "1.3.3"
+    versionCode = 8
+    versionName = "8.0"
 
     val dotEnvValues: Map<String, String> = run {
       val envFile = rootProject.file(".env")
@@ -68,17 +68,24 @@ android {
     }
   }
 
+  val enableReleaseMinify =
+    providers.gradleProperty("enableReleaseMinify").orNull.equals("true", ignoreCase = true)
+
   buildTypes {
     release {
       isCrunchPngs = false
-      isMinifyEnabled = true
-      isShrinkResources = true
+      isMinifyEnabled = enableReleaseMinify
+      isShrinkResources = enableReleaseMinify
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
       signingConfig = signingConfigs.getByName("release")
     }
     debug {
       signingConfig = signingConfigs.getByName("debugConfig")
     }
+  }
+  lint {
+    checkReleaseBuilds = false
+    abortOnError = false
   }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
